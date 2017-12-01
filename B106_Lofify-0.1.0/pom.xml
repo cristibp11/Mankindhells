@@ -4,7 +4,7 @@
 
   <groupId>B1-06</groupId>
   <artifactId>B106_Lofify</artifactId>
-  <version>0.1.0</version>
+  <version>1.1.0</version>
   <packaging>pom</packaging>
 
   <name>B106_Lofify</name>
