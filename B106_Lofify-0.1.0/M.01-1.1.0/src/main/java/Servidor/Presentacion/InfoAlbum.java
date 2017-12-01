@@ -156,7 +156,6 @@ public class InfoAlbum extends JPanel {
 		add(ftxtLanzamiento, gbc_ftxtLanzamiento);
 
 	}
-	
 	public String getNombre(){
 		return txtNombre.getText();
 	}
@@ -168,5 +167,4 @@ public class InfoAlbum extends JPanel {
 	public String getArtista(){
 		return txtArtista.getText();
 	}
-
 }

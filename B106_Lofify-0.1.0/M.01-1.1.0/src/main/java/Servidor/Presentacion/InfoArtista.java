@@ -96,7 +96,7 @@ public class InfoArtista extends JPanel {
 	}
 	
 	public String getDescripcion(){
-		return " ";
+		return "";
 	}
 
 }

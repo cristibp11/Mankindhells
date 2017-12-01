@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import Servidor.Persistencia.Agente;
+import Servidor.Presentacion.IU_Servidor;
 
 public class Gestor_Dominio {
 
@@ -29,12 +30,10 @@ public class Gestor_Dominio {
 				c = new Cancion(ar, titulo, metadatos, al, precio);
 				a.modificar("INSERT INTO canciones (idCanciones, titulo, album, precio, metadatos)"
 						+ "VALUES ("+c.getID()+", "+titulo+", "+al.getID()+", \""+precio+"\", "
-								+ "\""+metadatos+")");
+						+ "\""+metadatos+")");
 			}
-			System.out.println("Se han introducido los datos correctamente");
 		} catch (NullPointerException npe){
 			//Cancion no introducida por fallos de datos
-			System.out.println("error al introducir los datos");
 		}
 		return c;
 	}
@@ -53,10 +52,8 @@ public class Gestor_Dominio {
 				a.modificar("INSERT INTO albumes (idAlbum, nombre, precio, artista)"
 						+ "VALUES ("+al.getID()+", \""+nombre+"\", \""+precio+"\", \""+nombre_artista+"\")");
 			}
-			System.out.println("Se han introducido los datos correctamente");
 		} catch (NullPointerException npe){
 			//Cancion no introducida por fallos de datos
-			System.out.println("error al introducir los datos");
 		}
 		return al;
 	}
@@ -69,9 +66,58 @@ public class Gestor_Dominio {
 		if(result!=1){
 			throw new SQLException();
 		}else{
-			System.out.println("Se ha añadido correctamente");
 			return ar;
 		}
+	}
+
+	public static LinkedList<Cancion> buscarCancion(String titulo) throws SQLException, ClassNotFoundException{
+		Agente a = new Agente();
+		LinkedList<Cancion> busqueda = new LinkedList<Cancion>();
+		
+		ResultSet result = a.leer("SELECT * FROM canciones WHERE titulo=\""+titulo+"\"");
+		ResultSet resultArtista = a.leer("SELECT * FROM artistas WHERE id_artista="+result.getInt(5));
+		resultArtista.next();
+		ResultSet resultAlbum = a.leer("SELECT * FROM albumes WHERE album="+result.getInt(2));
+		resultAlbum.next();
+		
+		while(result.next()){
+			Artista autor = new Artista(resultArtista.getString(0),resultArtista.getString(1));
+			Album album = new Album(autor,resultAlbum.getString(1),resultAlbum.getDouble(2));
+			busqueda.add(new Cancion(autor,result.getString(1),result.getString(4),album,result.getDouble(3)));
+		}
+		
+		return busqueda;
+	}
+	
+	public static LinkedList<Album> buscarAlbum(String nombre) throws SQLException{
+		Agente a = new Agente();
+		LinkedList<Album> busqueda = new LinkedList<Album>();
+
+		ResultSet resultAlbum = a.leer("SELECT * FROM ALBUMES WHERE nombre=\""+nombre+"\"");
+		resultAlbum.next();
+		ResultSet resultArtista = a.leer("SELECT * FROM ARTISTAS WHERE id_artista="+resultAlbum.getInt(3));
+		resultArtista.next();
+		
+		while(resultAlbum.next()){
+			Artista autor = new Artista(resultArtista.getString(0),resultArtista.getString(1));
+			busqueda.add(new Album(autor,resultAlbum.getString(1),resultAlbum.getDouble(2)));
+		}
+		
+		return busqueda;
+	}
+	
+	public static LinkedList<Artista> buscarArtista(String nombre) throws SQLException{
+		Agente a = new Agente();
+		LinkedList<Artista> busqueda = new LinkedList<Artista>();
+		
+		ResultSet resultArtista = a.leer("SELECT * FROM ARTISTAS WHERE Nombre=\""+nombre+"\"");
+		resultArtista.next();
+		
+		while(resultArtista.next()){
+			busqueda.add(new Artista(resultArtista.getString(0),resultArtista.getString(1)));
+		}
+		
+		return busqueda;
 	}
 
 }

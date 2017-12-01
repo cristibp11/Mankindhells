@@ -48,6 +48,10 @@ public class Cancion {
 	public static Cancion addCancion(String titulo, String metadatos, Double precio, String nombre_artista, String nombre_album) throws NumberFormatException, ClassNotFoundException, SQLException{
 		return Servidor.Dominio.Gestor_Dominio.añadirCancion(titulo, metadatos, precio, nombre_artista, nombre_album);
 	}
+	
+	public static LinkedList<Cancion> getCancionByTitulo(String titulo) throws ClassNotFoundException, SQLException{
+		return Servidor.Dominio.Gestor_Dominio.buscarCancion(titulo);
+	}
 
 	public void setPrecio(double p) {
 		this.precio = p;

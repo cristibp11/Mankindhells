@@ -29,4 +29,5 @@ public class Artista {
 	public static Artista addArtista(String nombre, String descripcion) throws ClassNotFoundException, SQLException{
 		return Servidor.Dominio.Gestor_Dominio.añadirArtista(nombre, descripcion);
 	}
+
 }

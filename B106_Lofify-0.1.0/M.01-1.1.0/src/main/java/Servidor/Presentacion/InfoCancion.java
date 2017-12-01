@@ -2,9 +2,6 @@ package Servidor.Presentacion;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
-import Servidor.Dominio.Album;
-
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;

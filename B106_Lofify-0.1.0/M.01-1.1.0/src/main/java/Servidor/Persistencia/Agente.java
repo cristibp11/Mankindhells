@@ -23,7 +23,7 @@ public class Agente {
 
 		try {
 			Class.forName(driver);
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "root");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/BaseDatos", "root", "root");
 			System.out.println("Ha conectado con la base de datos");
 
 		} catch (Exception e) {

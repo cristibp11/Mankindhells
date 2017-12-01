@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -32,6 +33,7 @@ import javax.swing.border.TitledBorder;
 import Servidor.Dominio.Album;
 import Servidor.Dominio.Artista;
 import Servidor.Dominio.Cancion;
+import Servidor.Dominio.Gestor_Dominio;
 
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -120,10 +122,82 @@ public class IU_Servidor {
 		toolBar.setBorder(null);
 		pnlMenu.add(toolBar);
 		
-		btnAadirElemento = new JButton("Añadir elemento");
+		btnAadirElemento = new JButton("A\u00F1adir elemento");
 		btnAadirElemento.addActionListener(new BtnToolBarActionListener());
 		toolBar.add(btnAadirElemento);
-
+		
+		btnEnviarMensaje = new JButton("Enviar mensaje");
+		btnEnviarMensaje.addActionListener(new BtnToolBarActionListener());
+		toolBar.add(btnEnviarMensaje);
+		
+		pnlControles = new JPanel();
+		pnlPrincipal.add(pnlControles, BorderLayout.SOUTH);
+		
+	
+		splitPane = new JSplitPane();
+		pnlPrincipal.add(splitPane, BorderLayout.CENTER);
+		
+		pnlDatos = new JPanel();
+		pnlDatos.setMinimumSize(new Dimension(230, 10));
+		splitPane.setLeftComponent(pnlDatos);
+		GridBagLayout gbl_pnlDatos = new GridBagLayout();
+		gbl_pnlDatos.columnWidths = new int[]{0, 0};
+		gbl_pnlDatos.rowHeights = new int[]{0, 0, 0};
+		gbl_pnlDatos.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_pnlDatos.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		pnlDatos.setLayout(gbl_pnlDatos);
+		
+		comboBox = new JComboBox<String>();
+		comboBox.addActionListener(new ComboBoxActionListener());
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Nombre Canci\u00F3n", "Nombre \u00C1lbum", "Nombre Artista"}));
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 0;
+		gbc_comboBox.gridy = 0;
+		pnlDatos.add(comboBox, gbc_comboBox);
+		
+		list = new JList<String>();
+		list.addMouseListener(new ListMouseListener());
+		GridBagConstraints gbc_list = new GridBagConstraints();
+		gbc_list.fill = GridBagConstraints.BOTH;
+		gbc_list.gridx = 0;
+		gbc_list.gridy = 1;
+		pnlDatos.add(list, gbc_list);
+		
+		pnlInfo = new JPanel();
+		splitPane.setRightComponent(pnlInfo);
+		pnlInfo.setLayout(new BorderLayout(0, 0));
+		
+		pnlBusqueda = new JPanel();
+		pnlInfo.add(pnlBusqueda, BorderLayout.NORTH);
+		GridBagLayout gbl_pnlBusqueda = new GridBagLayout();
+		gbl_pnlBusqueda.columnWidths = new int[]{0, 0, 0};
+		gbl_pnlBusqueda.rowHeights = new int[]{0, 0};
+		gbl_pnlBusqueda.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlBusqueda.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		pnlBusqueda.setLayout(gbl_pnlBusqueda);
+		
+		textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 0, 5);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 0;
+		gbc_textField.gridy = 0;
+		pnlBusqueda.add(textField, gbc_textField);
+		textField.setColumns(10);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new btnBuscarActionListener());
+		GridBagConstraints gbc_btnBuscar = new GridBagConstraints();
+		gbc_btnBuscar.gridx = 1;
+		gbc_btnBuscar.gridy = 0;
+		pnlBusqueda.add(btnBuscar, gbc_btnBuscar);
+		
+		pnlInfoDeElemento = new JPanel();
+		pnlInfo.add(pnlInfoDeElemento, BorderLayout.CENTER);
+		pnlInfoDeElemento.setLayout(new GridLayout(0, 1, 0, 0));
+		
 		pnlAñadir = new JPanel();
 		frmAdmin.getContentPane().add(pnlAñadir, "Añadir elemento");
 		pnlAñadir.setLayout(new BorderLayout(0, 0));
@@ -164,9 +238,33 @@ public class IU_Servidor {
 		pnlInfo2.add(pnlInfoDeElemento2, BorderLayout.CENTER);
 		pnlInfoDeElemento2.setLayout(new GridLayout(0, 1, 0, 0));
 		pnlInfoDeElemento2.add(new InfoCancion(""));
-		
+
 	}
 
+	private class ListMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			pnlInfoDeElemento.removeAll();
+			switch(comboBox.getSelectedIndex()){
+			case 0:
+				pnlInfoDeElemento.add(new InfoCancion(list.getSelectedValue()));
+				break;
+			case 1:
+				pnlInfoDeElemento.add(new InfoAlbum(list.getSelectedValue()));
+				break;
+			case 2:
+				pnlInfoDeElemento.add(new InfoArtista(list.getSelectedValue()));
+				break;
+			}
+			pnlInfoDeElemento.revalidate();
+			pnlInfoDeElemento.repaint();
+		}
+	}
+	private class ComboBoxActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			list.clearSelection();
+		}
+	}
 	private class BtnToolBarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			((CardLayout)frmAdmin.getContentPane().getLayout()).show(frmAdmin.getContentPane(), e.getActionCommand());
@@ -202,7 +300,8 @@ public class IU_Servidor {
 				InfoCancion component1 = (InfoCancion) pnlInfoDeElemento2.getComponent(0);
 				
 				try{
-					Cancion.addCancion(component1.getNombre(), component1.getMetadatos(), component1.getPrecio(), component1.getArtista(),component1.getAlbum());
+					Cancion.addCancion(component1.getNombre(),component1.getMetadatos(), component1.getPrecio(), component1.getArtista(),component1.getAlbum());
+
 				}catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -212,6 +311,7 @@ public class IU_Servidor {
 				InfoAlbum component2 = (InfoAlbum) pnlInfoDeElemento2.getComponent(0);
 				
 				try{
+				
 					Album.addAlbum(component2.getNombre(), component2.getPrecio(), component2.getArtista());
 					
 				}catch (ClassNotFoundException | SQLException e1) {
@@ -219,6 +319,7 @@ public class IU_Servidor {
 					e1.printStackTrace();
 				}
 				break;
+
 			case 2:
 				InfoArtista component = (InfoArtista) pnlInfoDeElemento2.getComponent(0);
 				try {
@@ -232,5 +333,38 @@ public class IU_Servidor {
 			((CardLayout)frmAdmin.getContentPane().getLayout()).show(frmAdmin.getContentPane(), "Principal");
 		}
 	}
-	
+	private class btnBuscarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			switch(comboBox.getSelectedIndex()){
+			case 0:
+				try {
+					
+					Gestor_Dominio.buscarCancion(textField.getText());
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
+			case 1:
+				try {
+					
+					Gestor_Dominio.buscarAlbum(textField.getText());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
+			case 2:
+				try {
+					LinkedList<Artista> lista = Gestor_Dominio.buscarArtista(textField.getText());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
+			}
+			
+		}
+	}
 }
