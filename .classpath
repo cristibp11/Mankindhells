@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="B106_Lofify_TESTING-0.0.1-SNAPSHOT/src/main/java"/>
+	<classpathentry kind="src" path="B106_Lofify_TESTING-0.0.1-SNAPSHOT/src/test/java"/>
+	<classpathentry kind="src" path="B106_Lofify-0.1.0/M.01-1.1.0/src/main/java"/>
+	<classpathentry kind="src" path="B106_Lofify-0.1.0/M.01-1.1.0/src/test/java"/>
+	<classpathentry kind="src" path="B106_Lofify-0.1.0/M.02-1.1.0/src/main/java"/>
+	<classpathentry kind="src" path="B106_Lofify-0.1.0/M.02-1.1.0/src/test/java"/>
+	<classpathentry kind="src" path="B106_Lofify-0.1.0/src/main/java"/>
+	<classpathentry kind="src" path="B106_Lofify-0.1.0/src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="output" path="B106_Lofify-0.1.0/M.01-1.1.0/target/classes"/>
+</classpath>
