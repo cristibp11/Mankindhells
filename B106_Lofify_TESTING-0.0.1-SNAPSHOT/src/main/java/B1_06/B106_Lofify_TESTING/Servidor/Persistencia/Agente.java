@@ -1,5 +1,9 @@
 package B1_06.B106_Lofify_TESTING.Servidor.Persistencia;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Agente {
 	

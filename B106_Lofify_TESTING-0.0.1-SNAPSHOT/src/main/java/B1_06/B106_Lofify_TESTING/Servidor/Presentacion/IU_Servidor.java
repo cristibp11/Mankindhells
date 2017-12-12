@@ -1,28 +1,28 @@
 package B1_06.B106_Lofify_TESTING.Servidor.Presentacion;
 
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.text.MaskFormatter;
-import javax.swing.JFormattedTextField;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import javax.swing.JButton;
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import java.awt.CardLayout;
-import java.awt.Color;
 
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.text.MaskFormatter;
 
 public class IU_Servidor {
 
