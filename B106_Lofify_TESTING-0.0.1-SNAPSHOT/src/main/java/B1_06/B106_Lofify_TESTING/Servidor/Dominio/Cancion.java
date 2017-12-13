@@ -7,7 +7,7 @@ public class Cancion {
 	private String metadatos;
 	private Album album;
 	private double precio;
-	private long id;
+	private String id;
 
 	public Cancion(Artista autor, String titulo, String metadatos, Album album, double precio) {
 		this.autor = autor;
@@ -15,7 +15,7 @@ public class Cancion {
 		this.metadatos = metadatos;
 		this.album = album;
 		this.precio = precio;
-		this.id = this.album.getID()+this.titulo.hashCode();
+		this.id = Gestor_Dominio.getMD5(album.getID()+""+titulo);
 	}
 
 	public String getTitulo() {
@@ -38,7 +38,7 @@ public class Cancion {
 		return this.precio;
 	}
 
-	public long getID() {
+	public String getID() {
 		return this.id;
 	}
 

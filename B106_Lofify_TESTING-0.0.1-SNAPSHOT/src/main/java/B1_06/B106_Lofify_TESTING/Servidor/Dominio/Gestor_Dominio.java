@@ -197,7 +197,7 @@ public class Gestor_Dominio {
 		throw new UnsupportedOperationException();
 	}
 	
-	private static String getMD5(String input){
+	public static String getMD5(String input){
 		try{
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] messageDigest = md.digest(input.getBytes());

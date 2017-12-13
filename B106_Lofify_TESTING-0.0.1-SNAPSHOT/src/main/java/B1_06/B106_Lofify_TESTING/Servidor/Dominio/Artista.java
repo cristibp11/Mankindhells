@@ -2,14 +2,14 @@ package B1_06.B106_Lofify_TESTING.Servidor.Dominio;
 
 public class Artista {
 
-	private long id;
+	private String id;
 	private String nombre;
 	private String descripcion;
 
 	public Artista(String nombre, String descripcion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.id = this.nombre.hashCode()+this.descripcion.hashCode();
+		this.id = Gestor_Dominio.getMD5(nombre+""+descripcion);
 	}
 
 	public String getNombre() {
@@ -20,7 +20,7 @@ public class Artista {
 		return this.descripcion;
 	}
 	
-	public long getID(){
+	public String getID(){
 		return this.id;
 	}
 

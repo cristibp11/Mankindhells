@@ -8,15 +8,13 @@ public class Album {
 	private Artista autor;
 	private String nombre;
 	private double precio;
-	private long id;
-	
-	public Album(){}
+	private String id;
 	
 	public Album(Artista autor, String nombre, double precio) {
 		this.autor = autor;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.id = this.autor.hashCode()+this.nombre.hashCode();
+		this.id = Gestor_Dominio.getMD5(autor.getID()+""+nombre);
 	}
 
 	public String getNombre() {
@@ -31,7 +29,7 @@ public class Album {
 		return this.precio;
 	}
 
-	public long getID() {
+	public String getID() {
 		return this.id;
 	}
 	
