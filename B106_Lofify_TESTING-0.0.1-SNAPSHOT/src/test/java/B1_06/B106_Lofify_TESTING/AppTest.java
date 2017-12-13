@@ -20,10 +20,10 @@ public class AppTest {
 	@Test
 	public void testAddSong() {
 		try {
-			Cancion expecteds = Gestor_Dominio.añadirCancion("Potion Approaching", 
+			Cancion expected = Gestor_Dominio.añadirCancion("Potion Approaching", 
 					"msdkjhsd7", 0.99, "Arctic Monkeys", "Humbug");
-			Cancion actuals = Gestor_Dominio.buscarCancion(expecteds.getTitulo()).get(0);
-			assertArrayEquals(expecteds, actuals);
+			Cancion actuals = Gestor_Dominio.buscarCancion(expected.getTitulo()).get(0);
+			assertArrayEquals(expected, actuals);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,12 +36,12 @@ public class AppTest {
 		}
 	}
 
-	private void assertArrayEquals(Cancion expecteds, Cancion actuals) {
-		boolean titulo = expecteds.getTitulo().equals(actuals.getTitulo());
-		boolean metadatos = expecteds.getMeta().equals(actuals.getMeta());
-		boolean precio = expecteds.getPrecio()==actuals.getPrecio();
-		boolean autor = expecteds.getAutor().equals(actuals.getAutor());
-		boolean album = expecteds.getAlbum().equals(actuals.getAlbum());
+	private void assertArrayEquals(Cancion expected, Cancion actual) {
+		boolean titulo = expected.getTitulo().equals(actual.getTitulo());
+		boolean metadatos = expected.getMeta().equals(actual.getMeta());
+		boolean precio = expected.getPrecio()==actual.getPrecio();
+		boolean autor = expected.getAutor().equals(actual.getAutor());
+		boolean album = expected.getAlbum().equals(actual.getAlbum());
 		
 		if(!(titulo&&metadatos&&precio&&autor&&album))
 			throw new java.lang.AssertionError();
@@ -49,21 +49,21 @@ public class AppTest {
 
 	@Test
 	public void testAddAlbum() {
-		Album expecteds;
+		Album expected;
 		try {
-			expecteds = Gestor_Dominio.añadirAlbum("Humbug", 0.99*10, "Arctic Monkeys");
-			Album actuals = Gestor_Dominio.buscarAlbum("Humbug").get(0);
-			assertArrayEquals(expecteds, actuals);
+			expected = Gestor_Dominio.añadirAlbum("Humbug", 0.99*10, "Arctic Monkeys");
+			Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+			assertArrayEquals(expected, actual);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void assertArrayEquals(Album expecteds, Album actuals) {
-		boolean nombre = expecteds.getNombre().equals(actuals.getNombre());
-		boolean precio = expecteds.getPrecio()==actuals.getPrecio();
-		boolean autor = expecteds.getAutor().equals(actuals.getAutor());
+	private void assertArrayEquals(Album expected, Album actual) {
+		boolean nombre = expected.getNombre().equals(actual.getNombre());
+		boolean precio = expected.getPrecio()==actual.getPrecio();
+		boolean autor = expected.getAutor().equals(actual.getAutor());
 		
 		if(!(nombre&&precio&&autor))
 			throw new java.lang.AssertionError();
@@ -95,7 +95,18 @@ public class AppTest {
 
 	@Test
 	public void testRemoveSong() {
-
+		try {
+			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			Gestor_Dominio.eliminarCancion(expected);
+			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			assertArrayEquals(expected, actual);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
