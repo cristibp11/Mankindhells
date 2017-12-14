@@ -13,7 +13,6 @@ public class Agente {
 	
 
 	public Agente() {
-		System.out.println("Conexión establecida");
 	}
 
 	public String[] leer(String toSearch,short file){
@@ -26,23 +25,23 @@ public class Agente {
 		switch (file){ //file: 1 = cancion / 2 = album / 3 = artista / 4 = usuario 
 		case 1:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
-			sc = new Scanner(archivo);
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Cancion.txt");
 			break;
 		case 2:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Album.txt");
 			break;
 		case 3:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Artista.txt");
 			break;
 		case 4:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Usuario.txt");
 			break;
 		}
-		
+
+		sc = new Scanner(archivo);
 		sc.nextLine();
 		while(!((result = sc.nextLine().split("/"))[1].equals(toSearch)));
 		}
@@ -65,19 +64,19 @@ public class Agente {
 		switch (file){ //file: 1 = cancion / 2 = album / 3 = artista / 4 = usuario 
 		case 1:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Cancion");
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Cancion.txt");
 			break;
 		case 2:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Album");
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Album.txt");
 			break;
 		case 3:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Artista");
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Artista.txt");
 			break;
 		case 4:
 			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
-					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Usuario");
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia\\Usuario.txt");
 			break;
 		}
 		

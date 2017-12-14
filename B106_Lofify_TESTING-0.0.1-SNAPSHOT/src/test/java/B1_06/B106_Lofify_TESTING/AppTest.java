@@ -20,6 +20,41 @@ public class AppTest {
 
 	}
 
+
+	@Test
+	public void testAddArtist() {
+		Artista expecteds;
+		expecteds = Gestor_Dominio.añadirArtista("Arctic Monkeys", "");
+		Artista actuals = Gestor_Dominio.buscarArtista("Arctic Monkeys");
+		assertArrayEquals(expecteds, actuals);
+	}
+
+	private void assertArrayEquals(Artista expecteds, Artista actuals) {
+		boolean nombre = expecteds.getNombre().equals(actuals.getNombre());
+		boolean descripcion = expecteds.getDescripcion().equals(actuals.getDescripcion());
+
+		if (!(nombre && descripcion))
+			throw new java.lang.AssertionError();
+	}
+	
+
+	@Test
+	public void testAddAlbum() {
+		Album expected;
+		expected = Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
+		Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+		assertArrayEquals(expected, actual);
+	}
+
+	private void assertArrayEquals(Album expected, Album actual) {
+		boolean nombre = expected.getNombre().equals(actual.getNombre());
+		boolean precio = expected.getPrecio() == actual.getPrecio();
+		boolean autor = expected.getAutor().equals(actual.getAutor());
+
+		if (!(nombre && precio && autor))
+			throw new java.lang.AssertionError();
+	}
+	
 	@Test
 	public void testAddSong() {
 		try {
@@ -41,39 +76,6 @@ public class AppTest {
 		boolean album = expected.getAlbum().equals(actual.getAlbum());
 
 		if (!(titulo && metadatos && precio && autor && album))
-			throw new java.lang.AssertionError();
-	}
-
-	@Test
-	public void testAddAlbum() {
-		Album expected;
-		expected = Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
-		Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
-		assertArrayEquals(expected, actual);
-	}
-
-	private void assertArrayEquals(Album expected, Album actual) {
-		boolean nombre = expected.getNombre().equals(actual.getNombre());
-		boolean precio = expected.getPrecio() == actual.getPrecio();
-		boolean autor = expected.getAutor().equals(actual.getAutor());
-
-		if (!(nombre && precio && autor))
-			throw new java.lang.AssertionError();
-	}
-
-	@Test
-	public void testAddArtist() {
-		Artista expecteds;
-		expecteds = Gestor_Dominio.añadirArtista("Arctic Monkeys", "");
-		Artista actuals = Gestor_Dominio.buscarArtista("Arctic Monkeys").get(0);
-		assertArrayEquals(expecteds, actuals);
-	}
-
-	private void assertArrayEquals(Artista expecteds, Artista actuals) {
-		boolean nombre = expecteds.getNombre().equals(actuals.getNombre());
-		boolean descripcion = expecteds.getDescripcion().equals(actuals.getDescripcion());
-
-		if (!(nombre && descripcion))
 			throw new java.lang.AssertionError();
 	}
 
@@ -130,9 +132,9 @@ public class AppTest {
 	@Test
 	public void testRemoveArtist() {
 		try {
-			Artista expected = Gestor_Dominio.buscarArtista("Arctic Monkeys").get(0);
+			Artista expected = Gestor_Dominio.buscarArtista("Arctic Monkeys");
 			Gestor_Dominio.eliminarArtista(expected);
-			Artista actual = Gestor_Dominio.buscarArtista("Arctic Monkeys").get(0);
+			Artista actual = Gestor_Dominio.buscarArtista("Arctic Monkeys");
 			assertArrayEquals(expected, actual);
 			fail("Expected error");
 		} catch (SQLException e) {

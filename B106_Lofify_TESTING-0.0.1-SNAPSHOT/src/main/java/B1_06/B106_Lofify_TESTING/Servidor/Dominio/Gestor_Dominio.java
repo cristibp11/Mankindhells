@@ -13,22 +13,22 @@ public class Gestor_Dominio {
 	public static Cancion añadirCancion(String titulo, String metadatos, double precio, String nombre_artista,
 			String nombre_album){
 		Cancion c = null;
-		Artista ar = buscarArtista(nombre_artista).get(0);
+		Artista ar = buscarArtista(nombre_artista);
 		Album al = buscarAlbum(nombre_album).get(0);
 		c = new Cancion(ar, titulo, metadatos, al, precio);
 		Agente a = new Agente();
 		String[] search = {c.getID(),titulo,al.getID(),ar.getID(),String.valueOf(precio),metadatos};
-		a.modificar(search, (short) 1, (short) 1);
+		a.modificar(search, (short) 1, (short) 2);
 		return c;
 	}
 
 	public static Album añadirAlbum(String nombre, Double precio, String nombre_artista){
 		Album al = null;
-		Artista ar = buscarArtista(nombre_artista).get(0);
+		Artista ar = buscarArtista(nombre_artista);
 		al = new Album(ar, nombre, precio);
 		Agente a = new Agente();
 		String[] search = {al.getID(),nombre,ar.getID(),String.valueOf(precio)};
-		a.modificar(search, (short) 2, (short) 1);
+		a.modificar(search, (short) 2, (short) 2);
 		return al;
 	}
 
@@ -36,7 +36,7 @@ public class Gestor_Dominio {
 		Artista ar = new Artista(nombre, descripcion);
 		Agente a = new Agente();
 		String[] search = {ar.getID(),nombre,descripcion};
-		a.modificar(search, (short) 3, (short) 1);
+		a.modificar(search, (short) 3, (short) 2);
 		return ar;
 	}
 
@@ -45,7 +45,7 @@ public class Gestor_Dominio {
 		LinkedList<Cancion> list = new LinkedList<Cancion>();
 		String[] result = a.leer(titulo, (short) 1);
 		try{
-			Artista ar = buscarArtista(result[2]).get(0);
+			Artista ar = buscarArtista(result[2]);
 			Album al = buscarAlbum(result[1]).get(0);
 			list.add(new Cancion(ar, titulo, result[4], al, Double.parseDouble(result[3])));
 		}catch (NullPointerException npe){
@@ -59,7 +59,7 @@ public class Gestor_Dominio {
 		LinkedList<Album> list = new LinkedList<Album>();
 		String[] result = a.leer(nombre, (short) 2);
 		try{
-			Artista ar = buscarArtista(result[2]).get(0);
+			Artista ar = buscarArtista(result[2]);
 			list.add(new Album(ar, nombre, Double.parseDouble(result[3])));
 		}catch (NullPointerException npe){
 			
@@ -67,40 +67,40 @@ public class Gestor_Dominio {
 		return list;
 	}
 
-	public static LinkedList<Artista> buscarArtista(String nombre){
+	public static Artista buscarArtista(String nombre){
 		Agente a = new Agente();
-		LinkedList<Artista> list = new LinkedList<Artista>();
+		Artista ar = null;
 		String[] result = a.leer(nombre, (short) 3);
 		try{
-			list.add(new Artista(nombre, result[2]));
+			ar = new Artista(nombre, result[2]);
 		}catch (NullPointerException npe){
 			
 		}
-		return list;
+		return 	ar;
 	}
 
 	public static void modificarCancion(Cancion c) throws ClassNotFoundException, SQLException {
 		Agente a = new Agente();
 		String[] search = {c.getID(),c.getTitulo(),c.getAlbum().getID(),c.getAutor().getID(),String.valueOf(c.getPrecio()),c.getMeta()};
-		a.modificar(search, (short) 1, (short) 2);
+		a.modificar(search, (short) 1, (short) 1);
 	}
 
 	public static void eliminarCancion(Cancion c) throws SQLException {
 		Agente a = new Agente();
 		String[] search = {c.getID(),c.getTitulo(),c.getAlbum().getID(),c.getAutor().getID(),String.valueOf(c.getPrecio()),c.getMeta()};
-		a.modificar(search, (short) 1, (short) 3);
+		a.modificar(search, (short) 1, (short) 0);
 	}
 
 	public static void eliminarAlbum(Album c) throws SQLException {
 		Agente a = new Agente();
 		String[] search = {c.getID(),c.getNombre(),c.getAutor().getID(),String.valueOf(c.getPrecio())};
-		a.modificar(search, (short) 2, (short) 3);
+		a.modificar(search, (short) 2, (short) 0);
 	}
 
 	public static void eliminarArtista(Artista c) throws SQLException {
 		Agente a = new Agente();
 		String[] search = {c.getID(),c.getNombre(),c.getDescripcion()};
-		a.modificar(search, (short) 3, (short) 3);
+		a.modificar(search, (short) 3, (short) 0);
 	}
 
 	public Void enviarMensaje(String msj) {
