@@ -29,12 +29,6 @@ public class AppTest {
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
@@ -52,14 +46,9 @@ public class AppTest {
 	@Test
 	public void testAddAlbum() {
 		Album expected;
-		try {
-			expected = Gestor_Dominio.añadirAlbum("Humbug", 0.99*10, "Arctic Monkeys");
-			Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
-			assertArrayEquals(expected, actual);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		expected = Gestor_Dominio.añadirAlbum("Humbug", 0.99*10, "Arctic Monkeys");
+		Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+		assertArrayEquals(expected, actual);
 	}
 
 	private void assertArrayEquals(Album expected, Album actual) {
@@ -81,9 +70,6 @@ public class AppTest {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
@@ -103,9 +89,6 @@ public class AppTest {
 			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
 			assertArrayEquals(expected, actual);
 			fail("Expected error");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
