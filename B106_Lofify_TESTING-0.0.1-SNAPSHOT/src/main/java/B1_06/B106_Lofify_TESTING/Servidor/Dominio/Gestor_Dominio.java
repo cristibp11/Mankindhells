@@ -103,13 +103,8 @@ public class Gestor_Dominio {
 		a.modificar(search, (short) 3, (short) 3);
 	}
 
-	public Void enviarMensaje(Usuario u, String msj) {
+	public Void enviarMensaje(String msj) {
 		// TODO - implement Gestor_Dominio.enviarMensaje
-		throw new UnsupportedOperationException();
-	}
-
-	public Void eliminarElemento(long id) {
-		// TODO - implement Gestor_Dominio.eliminarElemento
 		throw new UnsupportedOperationException();
 	}
 	

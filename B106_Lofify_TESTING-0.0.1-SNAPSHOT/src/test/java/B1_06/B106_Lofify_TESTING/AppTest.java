@@ -77,6 +77,24 @@ public class AppTest {
 	}
 
 	@Test
+	public void testModifySong() {
+		try {
+			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			expected.setMetadatos("ncsacls8923");
+			expected.setPrecio(0.56);
+			Gestor_Dominio.modificarCancion(expected);
+			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			assertArrayEquals(expected, actual);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
 	public void testRemoveSong() {
 		try {
 			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
@@ -123,22 +141,10 @@ public class AppTest {
 
 		}
 	}
-
+	
 	@Test
-	public void testModifySong() {
-		try {
-			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
-			expected.setMetadatos("ncsacls8923");
-			expected.setPrecio(0.56);
-			Gestor_Dominio.modificarCancion(expected);
-			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
-			assertArrayEquals(expected, actual);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void testSigninUser() {
+		
 	}
+
 }
