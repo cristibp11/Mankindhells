@@ -25,7 +25,7 @@ public class Gestor_Remoto {
 	public static LinkedList<Usuario> buscarUsuario(String user, String pass){
 		Agente a = new Agente();
 		LinkedList<Usuario> list = new LinkedList<Usuario>();
-		String[] result = a.leer(user, pass, (short) 4);
+		String[] result = a.leer(user,(short) 4);
 		try{
 			list.add(new Usuario(user, pass, result[2], result[3], Long.valueOf(result[4]), result[5]));
 		}catch (NullPointerException npe){

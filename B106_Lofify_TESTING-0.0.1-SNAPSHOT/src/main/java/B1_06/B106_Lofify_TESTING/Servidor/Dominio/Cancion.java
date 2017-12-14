@@ -15,7 +15,7 @@ public class Cancion {
 		this.metadatos = metadatos;
 		this.album = album;
 		this.precio = precio;
-		this.id = Gestor_Dominio.getMD5(album.getID()+""+titulo);
+		this.id = Gestor_Dominio.getMD5(titulo+album.getID()+autor.getID());
 	}
 
 	public String getTitulo() {
