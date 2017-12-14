@@ -1,34 +1,88 @@
 package B1_06.B106_Lofify_TESTING.Servidor.Persistencia;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 public class Agente {
 	
-	private static Connection conn;
 
-	public Agente() throws ClassNotFoundException, SQLException{
+	public Agente() {
+		System.out.println("Conexión establecida");
+	}
+
+	public String[] leer(String toSearch,short file){
+		
+		String[] result = null;
+		File archivo = null;
+		Scanner sc = null;
+		
 		try{
-			if(conn==null){
-				Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-				conn = DriverManager.getConnection("jdbc:odbc:ruta_de_la_bdd");
-			}
-		}catch (NullPointerException npe){
-			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-			conn = DriverManager.getConnection("jdbc:odbc:ruta_de_la_bdd");
+		switch (file){ //file: 1 = cancion / 2 = album / 3 = artista / 4 = usuario 
+		case 1:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			sc = new Scanner(archivo);
+			break;
+		case 2:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			break;
+		case 3:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			break;
+		case 4:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			break;
 		}
+		
+		sc.nextLine();
+		while(!((result = sc.nextLine().split("/"))[1].equals(toSearch)));
+		}
+		catch(FileNotFoundException e){
+			System.out.println("Archivo no encontrado");
+		}
+		return result;
 	}
 
-	public ResultSet leer(String sql) throws SQLException {
-		PreparedStatement st = conn.prepareStatement(sql);
-		return st.executeQuery(sql);
-	}
-
-	public int modificar(String sql) throws SQLException {
-		PreparedStatement st = conn.prepareStatement(sql);
-		return st.executeUpdate();
+	public void modificar(String[] toModify, short file, short tipoMod){
+		
+		String[] result = null;
+		File archivo = null;
+		Scanner sc = null;
+		
+		try{
+		switch (file){ //file: 1 = cancion / 2 = album / 3 = artista / 4 = usuario 
+		case 1:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			sc = new Scanner(archivo);
+			break;
+		case 2:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			break;
+		case 3:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			break;
+		case 4:
+			archivo = new File(new File("").getAbsolutePath()+"\\B106_Lofify_TESTING-0.0.1\\src\\"
+					+ "main\\java\\B1_06\\B106_Lofify_TESTING\\Servidor\\Persistencia");
+			break;
+		}
+		
+		sc.nextLine();
+		while(!((result = sc.nextLine().split("/"))[1].equals(toModify[1])));
+		FileWriter escribir = new FileWriter(archivo, false);
+		escribir.;
+		}
+		catch(FileNotFoundException e){
+			System.out.println("Archivo no encontrado");
+		}
+		
 	}
 
 }
