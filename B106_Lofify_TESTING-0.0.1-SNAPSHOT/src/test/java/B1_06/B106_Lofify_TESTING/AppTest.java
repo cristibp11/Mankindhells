@@ -1,5 +1,7 @@
 package B1_06.B106_Lofify_TESTING;
 
+import static org.junit.Assert.fail;
+
 import java.sql.SQLException;
 
 import org.junit.Before;
@@ -100,6 +102,59 @@ public class AppTest {
 			Gestor_Dominio.eliminarCancion(expected);
 			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
 			assertArrayEquals(expected, actual);
+			fail("Expected error");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (java.lang.AssertionError ase) {
+			
+		}
+	}
+
+	@Test
+	public void testRemoveAlbum() {
+		try {
+			Album expected = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+			Gestor_Dominio.eliminarAlbum(expected);
+			Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+			assertArrayEquals(expected, actual);
+			fail("Expected error");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (java.lang.AssertionError ase) {
+			
+		}
+	}
+
+	@Test
+	public void testRemoveArtist() {
+		try {
+			Artista expected = Gestor_Dominio.buscarArtista("Arctic Monkeys").get(0);
+			Gestor_Dominio.eliminarArtista(expected);
+			Artista actual = Gestor_Dominio.buscarArtista("Arctic Monkeys").get(0);
+			assertArrayEquals(expected, actual);
+			fail("Expected error");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (java.lang.AssertionError ase) {
+			
+		}
+	}
+
+	@Test
+	public void testModifySong() {
+		try {
+			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			expected.setMetadatos("ncsacls8923");
+			expected.setPrecio(0.56);
+			Gestor_Dominio.modificarCancion(expected);
+			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			assertArrayEquals(expected, actual);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,20 +162,5 @@ public class AppTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	@Test
-	public void testRemoveAlbum() {
-
-	}
-
-	@Test
-	public void testRemoveArtist() {
-
-	}
-
-	@Test
-	public void testModifySong() {
-
 	}
 }

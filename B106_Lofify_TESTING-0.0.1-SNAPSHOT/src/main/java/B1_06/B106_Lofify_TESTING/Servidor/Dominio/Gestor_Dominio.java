@@ -12,179 +12,96 @@ import B1_06.B106_Lofify_TESTING.Servidor.Persistencia.Agente;
 public class Gestor_Dominio {
 
 	public static Cancion añadirCancion(String titulo, String metadatos, double precio, String nombre_artista,
-			String nombre_album) throws NumberFormatException, SQLException, ClassNotFoundException {
-		Agente a = new Agente();
-		ResultSet rs = a.leer("SELECT * FROM ALBUMES WHERE nombre=\"" + nombre_album + "\"");
-		Album al = null;
-		Artista ar = null;
+			String nombre_album){
 		Cancion c = null;
-		while (rs.next()) {
-			String autor_id = rs.getString(0);
-			Double al_precio = Double.parseDouble(rs.getString(2));
-			ResultSet rs2 = a.leer("SELECT * FROM ARTISTAS WHERE id=" + autor_id + "");
-			if (nombre_artista.equals(rs2.getString(1)))
-				continue;
-			ar = new Artista(nombre_artista, rs2.getString(2));
-			al = new Album(ar, nombre_album, al_precio);
-		}
-		try {
-			if (ar != null && al != null) {
-				c = new Cancion(ar, titulo, metadatos, al, precio);
-				a.modificar("INSERT INTO CANCIONES (id, autor, album, titulo, metadatos, precio)" + "VALUES ("
-						+ c.getID() + ", " + ar.getID() + ", " + al.getID() + ", \"" + titulo + "\", " + "\""
-						+ metadatos + "\", " + precio + ")");
-			}
-		} catch (NullPointerException npe) {
-			// Cancion no introducida por fallos de datos
-		}
+		Artista ar = buscarArtista(nombre_artista).get(0);
+		Album al = buscarAlbum(nombre_album).get(0);
+		c = new Cancion(ar, titulo, metadatos, al, precio);
+		Agente a = new Agente();
+		String[] search = {c.getID(),titulo,al.getID(),ar.getID(),String.valueOf(precio),metadatos};
+		a.modificar(search, 1, 1);
 		return c;
 	}
 
-	public static Album añadirAlbum(String nombre, Double precio, String nombre_artista) throws SQLException{
-		Agente a = null;
-		try {
-			a = new Agente();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ResultSet rs = a.leer("SELECT * FROM ARTISTAS WHERE nombre=\"" + nombre_artista + "\"");
+	public static Album añadirAlbum(String nombre, Double precio, String nombre_artista){
 		Album al = null;
-		Artista ar = null;
-		while (rs.next()) {
-			ar = new Artista(nombre_artista, rs.getString(2));
-			al = new Album(ar, nombre, precio);
-		}
-		try {
-			if (ar != null && al != null) {
-				a.modificar("INSERT INTO ALBUMES (id, autor, nombre, precio)" + "VALUES (" + al.getID() + ", "
-						+ ar.getID() + ", \"" + nombre + "\", " + precio + ")");
-			}
-		} catch (NullPointerException npe) {
-			// Cancion no introducida por fallos de datos
-		}
+		Artista ar = buscarArtista(nombre_artista).get(0);
+		al = new Album(ar, nombre, precio);
+		Agente a = new Agente();
+		String[] search = {al.getID(),nombre,ar.getID(),String.valueOf(precio)};
+		a.modificar(search, 2, 1);
 		return al;
 	}
 
-	public static Artista añadirArtista(String nombre, String descripcion) throws ClassNotFoundException, SQLException {
-		Agente a = new Agente();
+	public static Artista añadirArtista(String nombre, String descripcion){
 		Artista ar = new Artista(nombre, descripcion);
-		int result = a.modificar("INSERT INTO ARTISTAS (id, nombre, descripcion)" + "VALUES (" + ar.getID() + ", \""
-				+ ar.getNombre() + "\", \"" + ar.getDescripcion() + "\")");
-		if (result != 1) {
-			throw new SQLException();
-		} else {
-			return ar;
-		}
-	}
-
-	public static LinkedList<Cancion> buscarCancion(String titulo) throws SQLException, ClassNotFoundException {
 		Agente a = new Agente();
-		LinkedList<Cancion> busqueda = new LinkedList<Cancion>();
-
-		ResultSet result = a.leer("SELECT FROM CANCIONES WHERE titulo=\"" + titulo + "\"");
-		ResultSet resultArtista = a.leer("SELECT FROM ARTISTAS WHERE id=" + result.getLong(1));
-		resultArtista.next();
-		ResultSet resultAlbum = a.leer("SELECT FROM ALBUMES WHERE id=" + result.getLong(2));
-		resultAlbum.next();
-
-		while (result.next()) {
-			Artista autor = new Artista(resultArtista.getString(0), resultArtista.getString(1));
-			Album album = new Album(autor, resultAlbum.getString(1), resultAlbum.getDouble(2));
-			busqueda.add(new Cancion(autor, result.getString(3), result.getString(4), album, result.getDouble(5)));
-		}
-
-		return busqueda;
+		String[] search = {ar.getID(),nombre,descripcion};
+		a.modificar(search, 3, 1);
+		return ar;
 	}
 
-	public static LinkedList<Album> buscarAlbum(String nombre) throws SQLException {
-		Agente a = null;
-		try {
-			a = new Agente();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static LinkedList<Cancion> buscarCancion(String titulo){
+		Agente a = new Agente();
+		LinkedList<Cancion> list = new LinkedList<Cancion>();
+		String[] result = a.leer(titulo, 1);
+		try{
+			Artista ar = buscarArtista(result[2]).get(0);
+			Album al = buscarAlbum(result[1]).get(0);
+			list.add(new Cancion(ar, titulo, result[4], al, Double.parseDouble(result[3])));
+		}catch (NullPointerException npe){
+			
 		}
-		LinkedList<Album> busqueda = new LinkedList<Album>();
+		return list;
+	}
 
-		ResultSet resultAlbum = a.leer("SELECT FROM ALBUMES WHERE nombre=\"" + nombre + "\"");
-		resultAlbum.next();
-		ResultSet resultArtista = a.leer("SELECT FROM ARTISTAS WHERE id=" + resultAlbum.getLong(1));
-		resultArtista.next();
-
-		while (resultAlbum.next()) {
-			Artista autor = new Artista(resultArtista.getString(0), resultArtista.getString(1));
-			busqueda.add(new Album(autor, resultAlbum.getString(1), resultAlbum.getDouble(2)));
+	public static LinkedList<Album> buscarAlbum(String nombre){
+		Agente a = new Agente();
+		LinkedList<Album> list = new LinkedList<Album>();
+		String[] result = a.leer(nombre, 2);
+		try{
+			Artista ar = buscarArtista(result[2]).get(0);
+			list.add(new Album(ar, nombre, Double.parseDouble(result[3])));
+		}catch (NullPointerException npe){
+			
 		}
-
-		return busqueda;
+		return list;
 	}
 
 	public static LinkedList<Artista> buscarArtista(String nombre) throws SQLException {
-		Agente a = null;
-		try {
-			a = new Agente();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Agente a = new Agente();
+		LinkedList<Artista> list = new LinkedList<Artista>();
+		String[] result = a.leer(nombre, 3);
+		try{
+			list.add(new Artista(nombre, result[2]));
+		}catch (NullPointerException npe){
+			
 		}
-		LinkedList<Artista> busqueda = new LinkedList<Artista>();
-
-		ResultSet resultArtista = a.leer("SELECT FROM ARTISTAS WHERE nombre=\"" + nombre + "\"");
-		resultArtista.next();
-
-		while (resultArtista.next()) {
-			busqueda.add(new Artista(resultArtista.getString(0), resultArtista.getString(1)));
-		}
-
-		return busqueda;
+		return list;
 	}
 
-	public static Cancion modificarCancion(Cancion c) throws ClassNotFoundException, SQLException {
+	public static void modificarCancion(Cancion c) throws ClassNotFoundException, SQLException {
 		Agente a = new Agente();
-		int result = a.modificar("UPDATE CANCIONES SET metadatos=\"" + c.getMeta() + "\", precio=" + c.getPrecio()
-				+ " WHERE id=" + c.getID());
-		if (result == 1) {
-			return c;
-		} else {
-			return null;
-		}
+		String[] search = {c.getID(),c.getTitulo(),c.getAlbum().getID(),c.getAutor().getID(),String.valueOf(c.getPrecio()),c.getMeta()};
+		a.modificar(search, 1, 2);
 	}
 
 	public static void eliminarCancion(Cancion c) throws SQLException {
-		Agente a = null;
-		try {
-			a = new Agente();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		a.modificar("DELETE FROM CANCIONES WHERE id=" + c.getID());
+		Agente a = new Agente();
+		String[] search = {c.getID(),c.getTitulo(),c.getAlbum().getID(),c.getAutor().getID(),String.valueOf(c.getPrecio()),c.getMeta()};
+		a.modificar(search, 1, 3);
 	}
 
 	public static void eliminarAlbum(Album c) throws SQLException {
-		Agente a = null;
-		try {
-			a = new Agente();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		a.modificar("DELETE FROM ALBUMES WHERE id=" + c.getID());
+		Agente a = new Agente();
+		String[] search = {c.getID(),c.getNombre(),c.getAutor().getID(),String.valueOf(c.getPrecio())};
+		a.modificar(search, 2, 3);
 	}
 
 	public static void eliminarArtista(Artista c) throws SQLException {
-		Agente a = null;
-		try {
-			a = new Agente();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		a.modificar("DELETE FROM ARTISTA WHERE id=" + c.getID());
+		Agente a = new Agente();
+		String[] search = {c.getID(),c.getNombre(),c.getDescripcion()};
+		a.modificar(search, 3, 3);
 	}
 
 	public Void enviarMensaje(Usuario u, String msj) {
