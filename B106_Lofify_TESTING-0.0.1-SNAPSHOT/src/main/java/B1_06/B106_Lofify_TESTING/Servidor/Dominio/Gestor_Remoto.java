@@ -6,25 +6,20 @@ import B1_06.B106_Lofify_TESTING.Servidor.Persistencia.Agente;
 
 public class Gestor_Remoto {
 
-	public Void fabricaUsuarios() {
-		// TODO - implement Gestor_Remoto.fabricaUsuarios
-		throw new UnsupportedOperationException();
+	public static Usuario fabricaUsuarios() {
+		Usuario u = new Usuario("user", "user", "Default", "", (long) 213655987, "user@user.com");
+		Agente a = new Agente();
+		String[] search = {u.getUser(), u.getPass(), u.getNombre(), u.getApellidos(), String.valueOf(u.getnCuenta()), u.getEmail()};
+		a.modificar(search, (short) 4, (short) 1);
+		return u;
 	}
 
-	public Usuario creadorUsuarios() {
-		// TODO - implement Gestor_Remoto.creadorUsuarios
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param artista
-	 * @param album
-	 * @param titulo
-	 */
-	public Cancion buscar(String artista, String album, String titulo) {
-		// TODO - implement Gestor_Remoto.buscar
-		throw new UnsupportedOperationException();
+	public static Usuario creadorUsuarios(String user, String pass, String nombre, String apellidos, long cuenta, String email) {
+		Usuario u =  new Usuario(user, pass, nombre, apellidos, cuenta, email);
+		Agente a = new Agente();
+		String[] search = {u.getUser(), u.getPass(), u.getNombre(), u.getApellidos(), String.valueOf(u.getnCuenta()), u.getEmail()};
+		a.modificar(search, (short) 4, (short) 1);
+		return u;
 	}
 	
 	public static LinkedList<Usuario> buscarUsuario(String user, String pass){
@@ -53,9 +48,10 @@ public class Gestor_Remoto {
 	 * 
 	 * @param u
 	 */
-	public Void eliminarUsuario(Usuario u) {
-		// TODO - implement Gestor_Remoto.eliminarUsuario
-		throw new UnsupportedOperationException();
+	public static void eliminarUsuario(Usuario u) {
+		Agente a = new Agente();
+		String[] search = {u.getUser(), u.getPass(), u.getNombre(), u.getApellidos(), String.valueOf(u.getnCuenta()), u.getEmail()};
+		a.modificar(search, (short) 4, (short) 3);
 	}
 
 }
