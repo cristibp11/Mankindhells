@@ -92,10 +92,14 @@ public class Agente {
 			}
 
 			if (tipoMod == 1 || tipoMod == 2) {
-				for (int i = 0; i < toModify.length; i++)
-					aux += toModify[i];
+				for (int i = 0; i < toModify.length; i++){
+					if(i==1)
+						aux = toModify[0];
+					aux = aux+"/"+toModify[i];
+				}
 				lineas.addElement(aux);
 			}
+
 
 			br.close();
 			fr.close();
