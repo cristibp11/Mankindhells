@@ -24,7 +24,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>JunitExample</finalName>
+		<finalName>B106_Lofify_TESTING</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.jacoco</groupId>

@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class AgenteLocal {
 	
@@ -61,8 +62,12 @@ public class AgenteLocal {
 		
 		sc.nextLine();
 		while(!((result = sc.nextLine().split("/"))[1].equals(toModify[1])));
-		FileWriter escribir = new FileWriter(archivo, false);
-		escribir.;
+		try {
+			FileWriter escribir = new FileWriter(archivo, false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		}
 		catch(FileNotFoundException e){
 			System.out.println("Archivo no encontrado");
