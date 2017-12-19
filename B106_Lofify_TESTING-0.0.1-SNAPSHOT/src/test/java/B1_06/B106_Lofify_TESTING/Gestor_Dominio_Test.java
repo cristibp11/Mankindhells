@@ -12,20 +12,18 @@ import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Album;
 import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Artista;
 import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Cancion;
 import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Dominio;
-import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Usuario;
 
-public class AppTest {
-
+public class Gestor_Dominio_Test {
+	
 	@Before
 	public void setUp() throws Exception {
 
 	}
-
-
-	@Test
+	
+	@Ignore @Test
 	public void testAddArtist() {
 		Artista expecteds;
-		expecteds = Gestor_Dominio.añadirArtista("Arctic Monkeys", "");
+		expecteds = Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
 		Artista actuals = Gestor_Dominio.buscarArtista("Arctic Monkeys");
 		assertArrayEquals(expecteds, actuals);
 	}
@@ -125,7 +123,7 @@ public class AppTest {
 		}
 	}
 
-	@Ignore @Test
+	@Test
 	public void testRemoveArtist() {
 		try {
 			Artista expected = Gestor_Dominio.buscarArtista("Arctic Monkeys");
@@ -135,50 +133,6 @@ public class AppTest {
 			fail("Expected error");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (java.lang.AssertionError ase) {
-
-		}
-	}
-
-	@Ignore @Test
-	public void testSigninUserGeneral() {
-		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
-		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-				expected.getPass());
-		assertArrayEquals(expected, actual);
-	}
-
-	private void assertArrayEquals(Usuario expected, Usuario actual) {
-		boolean user = expected.getUser().equals(actual.getUser());
-		boolean pass = expected.getPass().equals(actual.getPass());
-		boolean nombre = expected.getNombre().equals(actual.getNombre());
-		boolean apellidos = expected.getApellidos().equals(actual.getApellidos());
-		boolean cuenta = expected.getnCuenta() == actual.getnCuenta();
-		boolean email = expected.getEmail().equals(actual.getEmail());
-
-		if (!(user && pass && nombre && apellidos && cuenta && email))
-			throw new java.lang.AssertionError();
-
-	}
-
-	@Ignore @Test
-	public void testSigninUserManual() {
-		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("manualUser",
-				"manualPass", "manualName", "firstName", (long) 236745632, "manual@manual.com");
-		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-				expected.getPass());
-		assertArrayEquals(expected, actual);
-	}
-
-	@Ignore @Test
-	public void testRemoveUser() {
-		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario("user", "user");
-		B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.eliminarUsuario(expected);
-		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-				expected.getPass());
-		try {
-			assertArrayEquals(expected, actual);
-			fail("Expected error");
 		} catch (java.lang.AssertionError ase) {
 
 		}

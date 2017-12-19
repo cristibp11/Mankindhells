@@ -1,8 +1,10 @@
 package B1_06.B106_Lofify_TESTING.Cliente.Dominio;
 
+import B1_06.B106_Lofify_TESTING.Servidor.Dominio.*;
+
 public class Gestor_Dominio {
 
-	public B1_06.B106_Lofify_TESTING.Servidor.Dominio.Usuario registrar() {
+	public Usuario registrar() {
 		// TODO - implement Gestor_Dominio.registrar
 		throw new UnsupportedOperationException();
 	}
