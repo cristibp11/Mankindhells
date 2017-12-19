@@ -19,22 +19,22 @@ public class Gestor_Remoto {
 			String email) {
 		Usuario Usuario = new Usuario(Usuarioser, pass, nombre, apellidos, cUsuarioenta, email);
 		Agente a = new Agente();
-		String[] search = { Usuario.getUser(), Usuario.getPass(), Usuario.getNombre(), Usuario.getApellidos(), String.valueOf(Usuario.getnCuenta()),
+		String[] search = { Usuario.getPass(), Usuario.getUser(),Usuario.getNombre(), Usuario.getApellidos(), String.valueOf(Usuario.getnCuenta()),
 				Usuario.getEmail() };
 		a.modificar(search, (short) 4, (short) 1);
 		return Usuario;
 	}
 
-	public static LinkedList<Usuario> buscarUsuario(String Usuarioser, String pass) {
+	public static Usuario buscarUsuario(String user, String pass) {
 		Agente a = new Agente();
-		LinkedList<Usuario> list = new LinkedList<Usuario>();
-		String[] resUsuariolt = a.leer(Usuarioser, (short) 4);
+		Usuario u = null;
+		String[] resUsuariolt = a.leer(user, (short) 4);
 		try {
-			list.add(new Usuario(Usuarioser, pass, resUsuariolt[2], resUsuariolt[3], Long.valueOf(resUsuariolt[4]), resUsuariolt[5]));
+			u = new Usuario(user, pass, resUsuariolt[2], resUsuariolt[3], Long.valueOf(resUsuariolt[4]), resUsuariolt[5]);
 		} catch (NullPointerException npe) {
 
 		}
-		return list;
+		return u;
 	}
 
 	/**

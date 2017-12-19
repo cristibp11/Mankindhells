@@ -14,13 +14,13 @@ import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Cancion;
 import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Dominio;
 
 public class Gestor_Dominio_Test {
-	
+
 	@Before
 	public void setUp() throws Exception {
 
 	}
-	
-	@Ignore @Test
+
+	@Test
 	public void testAddArtist() {
 		Artista expecteds;
 		expecteds = Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
@@ -35,56 +35,57 @@ public class Gestor_Dominio_Test {
 		if (!(nombre && descripcion))
 			throw new java.lang.AssertionError();
 	}
-	
 
-	@Ignore @Test
+	@Test
 	public void testAddAlbum() {
-		Album expected;
-		expected = Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
-		Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+		Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
+		Album expected = Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
+		Album actual = Gestor_Dominio.buscarAlbum("Humbug");
 		assertArrayEquals(expected, actual);
 	}
 
 	private void assertArrayEquals(Album expected, Album actual) {
 		boolean nombre = expected.getNombre().equals(actual.getNombre());
 		boolean precio = expected.getPrecio() == actual.getPrecio();
-		boolean autor = expected.getAutor().equals(actual.getAutor());
+		boolean autor = expected.getAutor().getID().equals(actual.getAutor().getID());
 
 		if (!(nombre && precio && autor))
 			throw new java.lang.AssertionError();
 	}
-	
-	@Ignore @Test
+
+	@Test
 	public void testAddSong() {
-		try {
-			Cancion expected = Gestor_Dominio.añadirCancion("Potion Approaching", "msdkjhsd7", 0.99, "Arctic Monkeys",
-					"Humbug");
-			Cancion actuals = Gestor_Dominio.buscarCancion(expected.getTitulo()).get(0);
-			assertArrayEquals(expected, actuals);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
+		Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
+		Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
+		Cancion expected = Gestor_Dominio.añadirCancion("Potion Approaching", "msdkjhsd7", 0.99, "Arctic Monkeys",
+				"Humbug");
+		Cancion actuals = Gestor_Dominio.buscarCancion(expected.getTitulo());
+		assertArrayEquals(expected, actuals);
 	}
 
 	private void assertArrayEquals(Cancion expected, Cancion actual) {
 		boolean titulo = expected.getTitulo().equals(actual.getTitulo());
 		boolean metadatos = expected.getMeta().equals(actual.getMeta());
 		boolean precio = expected.getPrecio() == actual.getPrecio();
-		boolean autor = expected.getAutor().equals(actual.getAutor());
-		boolean album = expected.getAlbum().equals(actual.getAlbum());
-
+		boolean autor = expected.getAutor().getID().equals(actual.getAutor().getID());
+		boolean album = expected.getAlbum().getID().equals(actual.getAlbum().getID());
+		
 		if (!(titulo && metadatos && precio && autor && album))
 			throw new java.lang.AssertionError();
 	}
-
-	@Ignore @Test
+	
+	@Test
 	public void testModifySong() {
 		try {
-			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
+			Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
+			Gestor_Dominio.añadirCancion("Potion Approaching", "msdkjhsd7", 0.99, "Arctic Monkeys",
+					"Humbug");
+			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching");
 			expected.setMetadatos("ncsacls8923");
 			expected.setPrecio(0.56);
 			Gestor_Dominio.modificarCancion(expected);
-			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching");
 			assertArrayEquals(expected, actual);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -93,40 +94,50 @@ public class Gestor_Dominio_Test {
 		}
 	}
 
-	@Ignore @Test
+	@Test
 	public void testRemoveSong() {
 		try {
-			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
+			Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
+			Gestor_Dominio.añadirCancion("Potion Approaching", "msdkjhsd7", 0.99, "Arctic Monkeys",
+					"Humbug");
+			Cancion expected = Gestor_Dominio.buscarCancion("Potion Approaching");
 			Gestor_Dominio.eliminarCancion(expected);
-			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching").get(0);
+			Cancion actual = Gestor_Dominio.buscarCancion("Potion Approaching");
 			assertArrayEquals(expected, actual);
 			fail("Expected error");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (java.lang.AssertionError ase) {
 
+		}catch(Exception e){
+			
 		}
 	}
 
-	@Ignore @Test
+	@Test
 	public void testRemoveAlbum() {
 		try {
-			Album expected = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+			Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
+			Gestor_Dominio.añadirAlbum("Humbug", 0.99 * 10, "Arctic Monkeys");
+			Album expected = Gestor_Dominio.buscarAlbum("Humbug");
 			Gestor_Dominio.eliminarAlbum(expected);
-			Album actual = Gestor_Dominio.buscarAlbum("Humbug").get(0);
+			Album actual = Gestor_Dominio.buscarAlbum("Humbug");
 			assertArrayEquals(expected, actual);
 			fail("Expected error");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (java.lang.AssertionError ase) {
 
+		} catch (Exception e){
+			
 		}
 	}
 
 	@Test
 	public void testRemoveArtist() {
 		try {
-			Artista expected = Gestor_Dominio.buscarArtista("Arctic Monkeys");
+			Artista expected = Gestor_Dominio.añadirArtista("Arctic Monkeys", "Descripcion");
 			Gestor_Dominio.eliminarArtista(expected);
 			Artista actual = Gestor_Dominio.buscarArtista("Arctic Monkeys");
 			assertArrayEquals(expected, actual);
@@ -134,6 +145,8 @@ public class Gestor_Dominio_Test {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (java.lang.AssertionError ase) {
+
+		} catch (Exception e) {
 
 		}
 	}

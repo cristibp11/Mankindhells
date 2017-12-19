@@ -15,7 +15,7 @@ public class Gestor_Remoto {
 	}
 	
 	public static Usuario_Logueado loginUsuario(String user, String pass){
-		Usuario u = B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.buscarUsuario(user, pass).get(0);
+		Usuario u = B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.buscarUsuario(user, pass);
 		Usuario_Logueado log = null;
 		try{
 			log = new Usuario_Logueado(u.getUser(), u.getPass(), u.getNombre(), u.getApellidos(), u.getnCuenta(), u.getEmail());

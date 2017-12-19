@@ -14,7 +14,7 @@ public class Gestor_Dominio {
 			String nombre_album){
 		Cancion c = null;
 		Artista ar = buscarArtista(nombre_artista);
-		Album al = buscarAlbum(nombre_album).get(0);
+		Album al = buscarAlbum(nombre_album);
 		c = new Cancion(ar, titulo, metadatos, al, precio);
 		Agente a = new Agente();
 		String[] search = {c.getID(),titulo,al.getID(),ar.getID(),String.valueOf(precio),metadatos};
@@ -40,31 +40,31 @@ public class Gestor_Dominio {
 		return ar;
 	}
 
-	public static LinkedList<Cancion> buscarCancion(String titulo){
+	public static Cancion buscarCancion(String titulo){
 		Agente a = new Agente();
-		LinkedList<Cancion> list = new LinkedList<Cancion>();
+		Cancion c = null;
 		String[] result = a.leer(titulo, (short) 1);
 		try{
-			Artista ar = buscarArtista(result[2]);
-			Album al = buscarAlbum(result[1]).get(0);
-			list.add(new Cancion(ar, titulo, result[4], al, Double.parseDouble(result[3])));
+			Artista ar = new Artista(result[3]);
+			Album al = new Album(result[2]);
+			c = new Cancion(ar, titulo, result[5], al, Double.parseDouble(result[4]));
 		}catch (NullPointerException npe){
 			
 		}
-		return list;
+		return c;
 	}
 
-	public static LinkedList<Album> buscarAlbum(String nombre){
+	public static Album buscarAlbum(String nombre){
 		Agente a = new Agente();
-		LinkedList<Album> list = new LinkedList<Album>();
+		Album al = null;
 		String[] result = a.leer(nombre, (short) 2);
 		try{
-			Artista ar = buscarArtista(result[2]);
-			list.add(new Album(ar, nombre, Double.parseDouble(result[3])));
+			Artista ar = new Artista(result[2]);
+			al = new Album(ar, nombre, Double.parseDouble(result[3]));
 		}catch (NullPointerException npe){
 			
 		}
-		return list;
+		return al;
 	}
 
 	public static Artista buscarArtista(String nombre){

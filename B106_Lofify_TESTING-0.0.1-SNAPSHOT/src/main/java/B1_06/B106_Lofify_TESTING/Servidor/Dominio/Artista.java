@@ -11,6 +11,10 @@ public class Artista {
 		this.descripcion = descripcion;
 		this.id = Gestor_Dominio.getMD5(nombre+""+descripcion);
 	}
+	
+	public Artista(String id){
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return this.nombre;

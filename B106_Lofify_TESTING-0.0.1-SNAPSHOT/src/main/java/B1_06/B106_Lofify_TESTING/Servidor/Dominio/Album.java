@@ -16,6 +16,10 @@ public class Album {
 		this.precio = precio;
 		this.id = Gestor_Dominio.getMD5(autor.getID()+""+nombre);
 	}
+	
+	public Album(String id){
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return this.nombre;
