@@ -1,7 +1,6 @@
 ID/ARTISTA/DESCRIPCION
 6615140bab671a08149fb86ba0502f63/Kid Keo/Artista de trap spanglish
 -4a406bf71fc046e575d84a4199ccba28/Queen/Mitico primo
-48cc47908179dfb40456057708d01abe/Cafe Quijano/Merengueo a tope
 -41269b578a8a4c6c200586ebed69f509/Lil Pump/Gucci gang gucci gang gucci gang gucci gang...
 -3d51055ef1d39f3d97dd0a57cdd0f947/Kinder Malo/Artista de trap rollo sadboy
 283d5390be1145bab4d4071db564b1eb/Pablo López/Descripcion

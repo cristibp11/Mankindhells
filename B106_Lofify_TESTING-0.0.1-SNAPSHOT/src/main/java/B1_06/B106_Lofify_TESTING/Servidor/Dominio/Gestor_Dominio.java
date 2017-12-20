@@ -27,7 +27,6 @@ public class Gestor_Dominio {
 
 	public static Album añadirAlbum(String nombre, Double precio, String nombre_artista) {
 		Album al = null;
-		try {
 			if (nombre != null && nombre_artista != null) {
 				Artista ar = buscarArtista(nombre_artista);
 				al = new Album(ar, nombre, precio);
@@ -35,9 +34,6 @@ public class Gestor_Dominio {
 				String[] search = { al.getID(), nombre, ar.getID(), String.valueOf(precio) };
 				a.modificar(search, (short) 2, (short) 2);
 			}
-		} catch (java.util.NoSuchElementException nsee) {
-			return al;
-		}
 		return al;
 	}
 
@@ -56,14 +52,12 @@ public class Gestor_Dominio {
 		Agente a = new Agente();
 		Cancion c = null;
 		if (titulo != null) {
-			try {
 				String[] result = a.leer(titulo, (short) 1);
+				if(result != null){
 				Artista ar = new Artista(result[3]);
 				Album al = new Album(result[2]);
 				c = new Cancion(ar, titulo, result[5], al, Double.parseDouble(result[4]));
-			} catch (NoSuchElementException npe) {
-				return c;
-			}
+				}
 		}
 		return c;
 	}
@@ -71,13 +65,11 @@ public class Gestor_Dominio {
 	public static Album buscarAlbum(String nombre) {
 		Agente a = new Agente();
 		Album al = null;
-		try {
 			String[] result = a.leer(nombre, (short) 2);
+			if(result != null){
 			Artista ar = new Artista(result[2]);
 			al = new Album(ar, nombre, Double.parseDouble(result[3]));
-		} catch (java.util.NoSuchElementException nsee) {
-			return al;
-		}
+			}
 		return al;
 	}
 
@@ -93,30 +85,37 @@ public class Gestor_Dominio {
 		return ar;
 	}
 
-	public static void modificarCancion(Cancion c) throws ClassNotFoundException, SQLException {
+	public static void modificarCancion(Cancion c){
 		Agente a = new Agente();
 		String[] search = { c.getID(), c.getTitulo(), c.getAlbum().getID(), c.getAutor().getID(),
 				String.valueOf(c.getPrecio()), c.getMeta() };
 		a.modificar(search, (short) 1, (short) 1);
 	}
 
-	public static void eliminarCancion(Cancion c) throws SQLException {
+	public static void eliminarCancion(Cancion c){
+		if(c != null){
 		Agente a = new Agente();
 		String[] search = { c.getID(), c.getTitulo(), c.getAlbum().getID(), c.getAutor().getID(),
 				String.valueOf(c.getPrecio()), c.getMeta() };
 		a.modificar(search, (short) 1, (short) 0);
+		}
+		
 	}
 
-	public static void eliminarAlbum(Album c) throws SQLException {
+	public static void eliminarAlbum(Album c){
+		if(c != null){
 		Agente a = new Agente();
 		String[] search = { c.getID(), c.getNombre(), c.getAutor().getID(), String.valueOf(c.getPrecio()) };
 		a.modificar(search, (short) 2, (short) 0);
+		}
 	}
 
-	public static void eliminarArtista(Artista c) throws SQLException {
+	public static void eliminarArtista(Artista c) {
+		if(c != null && c.getNombre() != null && c.getID() != null && c.getNombre() != null){
 		Agente a = new Agente();
 		String[] search = { c.getID(), c.getNombre(), c.getDescripcion() };
 		a.modificar(search, (short) 3, (short) 0);
+		}
 	}
 
 	public Void enviarMensaje(String msj) {

@@ -18,6 +18,7 @@ public class Agente {
 	public String[] leer(String toSearch, short file) {
 
 		String[] result = null;
+		String[] aux = null;
 		File archivo = null;
 		Scanner sc = null;
 
@@ -44,10 +45,16 @@ public class Agente {
 
 			sc = new Scanner(archivo);
 			sc.nextLine();
-			while (!((result = sc.nextLine().split("/"))[1].equals(toSearch)));
+			while (sc.hasNextLine()){
+				if(((aux = sc.nextLine().split("/"))[1].equals(toSearch))){
+					result = aux;
+					break;
+				};
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Archivo no encontrado");
 		}
+		sc.close();
 		return result;
 	}
 
