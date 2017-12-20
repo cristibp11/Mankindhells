@@ -118,11 +118,6 @@ public class Gestor_Dominio {
 		}
 	}
 
-	public Void enviarMensaje(String msj) {
-		// TODO - implement Gestor_Dominio.enviarMensaje
-		throw new UnsupportedOperationException();
-	}
-
 	public static String getMD5(String input) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

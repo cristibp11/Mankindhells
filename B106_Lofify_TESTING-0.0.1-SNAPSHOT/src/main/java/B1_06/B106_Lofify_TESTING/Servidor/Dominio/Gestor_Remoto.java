@@ -40,16 +40,6 @@ public class Gestor_Remoto {
 	/**
 	 * 
 	 * @param Usuario
-	 * @param cantidad
-	 */
-	public Void cobrarPaypal(Usuario Usuario, double cantidad) {
-		// TODO - implement Gestor_Remoto.cobrarPaypal
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param Usuario
 	 */
 	public static void eliminarUsuario(Usuario Usuario) {
 		Agente a = new Agente();

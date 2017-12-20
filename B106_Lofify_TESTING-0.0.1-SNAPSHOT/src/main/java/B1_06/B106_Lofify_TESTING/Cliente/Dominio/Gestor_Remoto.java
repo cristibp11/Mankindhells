@@ -25,24 +25,4 @@ public class Gestor_Remoto {
 		return log;
 	}
 
-	/**
-	 * 
-	 * @param artista
-	 * @param album
-	 * @param titulo
-	 */
-	public Cancion buscar(String artista, String album, String titulo) {
-		// TODO - implement Gestor_Remoto.buscar
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param cantidad
-	 */
-	public void cobrar(double cantidad) {
-		// TODO - implement Gestor_Remoto.cobrar
-		throw new UnsupportedOperationException();
-	}
-
 }
