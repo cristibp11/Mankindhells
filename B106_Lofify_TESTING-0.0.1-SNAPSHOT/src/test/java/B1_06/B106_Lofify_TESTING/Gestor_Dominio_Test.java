@@ -22,85 +22,106 @@ public class Gestor_Dominio_Test {
 
 	@Test
 	public void testAddArtist_StringIsStringIs() {
-		Artista expecteds;
-		Artista actuals;
-		if((expecteds = Gestor_Dominio.añadirArtista("Kinder Malo", "Artista de trap rollo sadboy")) == null){
-			actuals = null;
+		Artista expected;
+		Artista actual;
+		if((expected = Gestor_Dominio.añadirArtista("Kinder Malo", "Artista de trap rollo sadboy")) == null){
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		}else{ 
+			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
+			assertEquals(expected.getNombre(), actual.getNombre());
 		}
-		else{ actuals = Gestor_Dominio.buscarArtista(expecteds.getNombre());}
-		assertEquals(expecteds.getNombre(), actuals.getNombre());
 	}
 
 	@Test
 	public void testAddArtist_NullString() {
-		Artista expecteds;
-		Artista actuals;
-		if((expecteds = Gestor_Dominio.añadirArtista(null, "Descripcion")) == null){
-			actuals = null;
+		Artista expected;
+		Artista actual;
+		if((expected = Gestor_Dominio.añadirArtista(null, "Descripcion")) == null){
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		}else{ 
+			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
+			assertEquals(expected.getNombre(), actual.getNombre());
 		}
-		else{ actuals = Gestor_Dominio.buscarArtista(expecteds.getNombre());}
-		assertNull(expecteds);
-		assertNull(actuals);
+		
 	}
 
 	@Test
 	public void testAddArtist_StringIsntStringIsnt() {
-		Artista expecteds;
-		Artista actuals;
-		if((expecteds = Gestor_Dominio.añadirArtista("Pablo López","Descripcion")) == null){
-			actuals = null;
+		Artista expected;
+		Artista actual;
+		if((expected = Gestor_Dominio.añadirArtista("Pablo López","Descripcion")) == null){
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		}else{ 
+			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
+			assertEquals(expected.getNombre(), actual.getNombre());
 		}
-		else{ actuals = Gestor_Dominio.buscarArtista(expecteds.getNombre());}
-		assertEquals(expecteds.getNombre(), actuals.getNombre());
 	}
 
 	@Test
 	public void testAddArtist_NullNull() {
-		Artista expecteds;
-		Artista actuals;
-		if((expecteds = Gestor_Dominio.añadirArtista(null,null)) == null){
-			actuals = null;
+		Artista expected;
+		Artista actual;
+		if((expected = Gestor_Dominio.añadirArtista(null,null)) == null){
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		}else{ 
+			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
+			assertEquals(expected.getNombre(), actual.getNombre());
 		}
-		else{ actuals = Gestor_Dominio.buscarArtista(expecteds.getNombre());}
-		assertNull(expecteds);
-		assertNull(actuals);
 	}
 	
-	/*@Test
-	public void testAddAlbumStringIsDoubleStringIsnt() {
-
-		Album expected = Gestor_Dominio.añadirAlbum("Hit And Run", 2.0 * 10, "Pablo López");
-		Album actual = Gestor_Dominio.buscarAlbum("Hit And Run");
-		assertArrayEquals(expected, actual);
-	}
-
 	@Test
-	public void testAddAlbumNullDoubleNull() {
-		Album expected = Gestor_Dominio.añadirAlbum(null, 260.0 * 10, null);
-		Album actual = Gestor_Dominio.buscarAlbum(null);
-		assertArrayEquals(expected, actual);
+	public void testAddAlbumStringIsDoubleStringIsnt() {
+		Album expected;
+		Album actual;
+		if((expected = Gestor_Dominio.añadirAlbum("Hit And Run", 2.0 * 10, "Pablo López")) == null){
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		}else{ 
+			actual = Gestor_Dominio.buscarAlbum(expected.getNombre());
+			assertEquals(expected.getNombre(), actual.getNombre());
+		}
+	}
+		
+	@Test
+	public void testAddAlbumNullDoubleNull() {	
+		Album expected;
+		Album actual;
+		if((expected = Gestor_Dominio.añadirAlbum(null, 260.0 * 10, null)) == null){
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		}else{ 
+			actual = Gestor_Dominio.buscarAlbum(expected.getNombre());
+			assertEquals(expected.getNombre(), actual.getNombre());
+		}
 	}
 
 	@Test
 	public void testAddAlbumStringDoubleNull() {
-		Album expected = Gestor_Dominio.añadirAlbum("Prometo", 0.1 * 10, null);
-		Album actual = Gestor_Dominio.buscarAlbum("Prometo");
-		assertArrayEquals(expected, actual);
-	}
-
-	private void assertArrayEquals(Album expected, Album actual) {
-		try {
-			boolean nombre = expected.getNombre().equals(actual.getNombre());
-			boolean precio = expected.getPrecio() == actual.getPrecio();
-			boolean autor = expected.getAutor().getID().equals(actual.getAutor().getID());
-
-			if (!(nombre && precio && autor))
-				throw new java.lang.AssertionError();
-		} catch (java.lang.NullPointerException npe) {
-
+		Album expected;
+		Album actual;
+		if((expected = Gestor_Dominio.añadirAlbum("Prometo", 0.1 * 10, null)) == null){
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		}else{ 
+			actual = Gestor_Dominio.buscarAlbum(expected.getNombre());
+			assertEquals(expected.getNombre(), actual.getNombre());
 		}
+		
 	}
 
+
+ /*
 	@Test
 	public void testAddSongStringIsStringIsDoubleStringIsNull() {
 		Cancion actuals = null;
