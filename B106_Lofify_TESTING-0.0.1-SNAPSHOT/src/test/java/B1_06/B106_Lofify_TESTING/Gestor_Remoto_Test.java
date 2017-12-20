@@ -18,7 +18,27 @@ public class Gestor_Remoto_Test {
 	}
 
 	@Test
-	public void testSigninUserGeneral() {
+	public void testSigninUserGeneral_Exist_Exist() {
+		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
+		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+				expected.getPass());
+		assertArrayEquals(expected, actual);
+	}
+
+	@Test
+	public void testSigninUserGeneral_Exist_NoExist() {
+		try {
+			Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
+			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+					"randomPassword.petns");
+			assertArrayEquals(expected, actual);
+		} catch (NoSuchElementException nse) {
+			/* Queriamos que ocurriera le error */
+		}
+	}
+
+	@Test
+	public void testSigninUserGeneral_NoExist_NoExist() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
 		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
 				expected.getPass());
@@ -38,6 +58,7 @@ public class Gestor_Remoto_Test {
 
 	}
 
+	@Ignore
 	@Test
 	public void testSigninUserManual() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("manualUser",
@@ -47,6 +68,7 @@ public class Gestor_Remoto_Test {
 		assertArrayEquals(expected, actual);
 	}
 
+	@Ignore
 	@Test
 	public void testRemoveUser() {
 		try {
