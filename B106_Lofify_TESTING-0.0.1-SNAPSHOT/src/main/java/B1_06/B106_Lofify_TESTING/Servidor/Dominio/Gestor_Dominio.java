@@ -86,10 +86,8 @@ public class Gestor_Dominio {
 		if (nombre != null) {
 			Agente a = new Agente();
 			String[] result = a.leer(nombre, (short) 3);
-			try {
-				ar = new Artista(nombre, result[2]);
-			} catch (NullPointerException npe) {
-
+			if(result != null){
+			ar = new Artista(nombre, result[2]);
 			}
 		}
 		return ar;
