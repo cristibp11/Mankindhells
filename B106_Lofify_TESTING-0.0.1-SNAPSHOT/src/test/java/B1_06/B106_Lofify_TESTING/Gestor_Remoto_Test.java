@@ -1,6 +1,6 @@
 package B1_06.B106_Lofify_TESTING;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.NoSuchElementException;
 
@@ -18,70 +18,116 @@ public class Gestor_Remoto_Test {
 	}
 
 	@Test
-	public void testSigninUserGeneral_Exist_Exist() {
-		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
-		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-				expected.getPass());
-		assertArrayEquals(expected, actual);
-	}
-
-	@Test
-	public void testSigninUserGeneral_Exist_NoExist() {
-		try {
-			Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
-			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-					"randomPassword.petns");
-			assertArrayEquals(expected, actual);
-		} catch (NoSuchElementException nse) {
-			/* Queriamos que ocurriera le error */
-		}
-	}
-
-	@Test
-	public void testSigninUserGeneral_NoExist_NoExist() {
-		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
-		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-				expected.getPass());
-		assertArrayEquals(expected, actual);
-	}
-
-	private void assertArrayEquals(Usuario expected, Usuario actual) {
-		boolean user = expected.getUser().equals(actual.getUser());
-		boolean pass = expected.getPass().equals(actual.getPass());
-		boolean nombre = expected.getNombre().equals(actual.getNombre());
-		boolean apellidos = expected.getApellidos().equals(actual.getApellidos());
-		boolean cuenta = expected.getnCuenta() == actual.getnCuenta();
-		boolean email = expected.getEmail().equals(actual.getEmail());
-
-		if (!(user && pass && nombre && apellidos && cuenta && email))
-			throw new java.lang.AssertionError();
-
-	}
-
-	@Ignore
-	@Test
-	public void testSigninUserManual() {
-		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("manualUser",
-				"manualPass", "manualName", "firstName", (long) 236745632, "manual@manual.com");
-		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-				expected.getPass());
-		assertArrayEquals(expected, actual);
-	}
-
-	@Ignore
-	@Test
-	public void testRemoveUser() {
-		try {
-			Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioGeneral();
-			B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.eliminarUsuario(expected);
-			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+	public void testSigninUserManual_1() {
+		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("", "",
+				"Cristina", "Bolanos Perez", -300, "");
+		Usuario actual;
+		if (expected == null) {
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		} else {
+			actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
 					expected.getPass());
-			assertArrayEquals(expected, actual);
-			fail("Expected error");
-		} catch (java.lang.AssertionError ase) {
-
-		} catch (NoSuchElementException nse) {
-
+			assertEquals(expected.getUser(), actual.getUser());
+			assertEquals(expected.getPass(), actual.getPass());
 		}
+	}
+
+	@Test
+	public void testSigninUserManual_2() {
+		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("Erizo12", null,
+				null, null, 1, "CrisDelegada@gmail.com");
+		Usuario actual;
+		if (expected == null) {
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		} else {
+			actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+					expected.getPass());
+			assertEquals(expected.getUser(), actual.getUser());
+			assertEquals(expected.getPass(), actual.getPass());
+		}
+	}
+
+	@Test
+	public void testSigninUserManual_3() {
+		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("Nuevo usuario",
+				"Contraseña nueva", "Nombre", "Apellidos", (long) 1000000, null);
+		Usuario actual;
+		if (expected == null) {
+			actual = null;
+			assertNull(expected);
+			assertNull(actual);
+		} else {
+			actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+					expected.getPass());
+			assertEquals(expected.getUser(), actual.getUser());
+			assertEquals(expected.getPass(), actual.getPass());
+		}
+	}
+
+	@Test
+	public void loginUser_1() {
+		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario("Erizo12",
+				"New password");
+		if (actual == null) {
+			assertNull(actual);
+		} else {
+			assertNotNull(actual);
+		}
+	}
+
+	@Test
+	public void loginUser_2() {
+		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario("Pepe", "Pess");
+		if (actual == null) {
+			assertNull(actual);
+		} else {
+			assertNotNull(actual);
+		}
+	}
+
+	@Test
+	public void loginUser_3() {
+		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(null, null);
+		if (actual == null) {
+			assertNull(actual);
+		} else {
+			assertNotNull(actual);
+		}
+	}
+
+	@Test
+	public void testRemoveUser_Exist() {
+		Usuario expected = new Usuario("Piss", "CristiBolsas", "Cristina", "Bolanos Perez", (long) 123456788,
+				"Cristibope@gmail.com");
+		B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.eliminarUsuario(expected);
+		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+				expected.getPass());
+		assertNotNull(expected);
+		assertNull(actual);
+	}
+
+	@Test
+	public void testRemoveUser_NoExist() {
+		Usuario expected = new Usuario("NoExist", "NoExist", "NoExist", "NoExist", (long) 123456788,
+				"NoExist");
+		B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.eliminarUsuario(expected);
+		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+				expected.getPass());
+		assertNotNull(expected);
+		assertNull(actual);
+	}
+
+	@Test
+	public void testRemoveUser_NullAtributes() {
+		Usuario expected = new Usuario(null, null, null, null, (long) -8, null);
+		B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.eliminarUsuario(expected);
+		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+				expected.getPass());
+		assertNotNull(expected);
+		assertNull(actual);
 	}
 }
