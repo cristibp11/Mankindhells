@@ -87,9 +87,11 @@ public class Gestor_Dominio {
 
 	public static void modificarCancion(Cancion c){
 		Agente a = new Agente();
+		if(c != null){
 		String[] search = { c.getID(), c.getTitulo(), c.getAlbum().getID(), c.getAutor().getID(),
 				String.valueOf(c.getPrecio()), c.getMeta() };
 		a.modificar(search, (short) 1, (short) 1);
+		}
 	}
 
 	public static void eliminarCancion(Cancion c){
