@@ -24,71 +24,58 @@ public class Gestor_Dominio_Test {
 	public void testAddArtist_StringIsStringIs() {
 		Artista expected;
 		Artista actual;
-		if((expected = Gestor_Dominio.añadirArtista("Kinder Malo", "Artista de trap rollo sadboy")) == null){
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		}else{ 
-			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
-			assertEquals(expected.getNombre(), actual.getNombre());
-		}
+		
+		expected = Gestor_Dominio.añadirArtista("Kinder Malo", "Artista de trap rollo sadboy");
+		actual = Gestor_Dominio.buscarArtista(expected.getNombre());
+		assertEquals(expected.getNombre(), actual.getNombre());
 	}
 
 	@Test
 	public void testAddArtist_NullString() {
 		Artista expected;
-		Artista actual;
-		if((expected = Gestor_Dominio.añadirArtista(null, "Descripcion")) == null){
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		}else{ 
-			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
-			assertEquals(expected.getNombre(), actual.getNombre());
-		}
+		Artista actual = null;
 		
+		expected = Gestor_Dominio.añadirArtista(null, "Descripcion");
+		assertNull(expected);
+		assertNull(actual);
+		
+		actual = Gestor_Dominio.buscarArtista(expected.getNombre());
+		assertEquals(expected.getNombre(),actual.getNombre());
+
 	}
 
 	@Test
 	public void testAddArtist_StringIsntStringIsnt() {
 		Artista expected;
 		Artista actual;
-		if((expected = Gestor_Dominio.añadirArtista("Pablo López","Descripcion")) == null){
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		}else{ 
-			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
-			assertEquals(expected.getNombre(), actual.getNombre());
-		}
+		
+		expected = Gestor_Dominio.añadirArtista("Pablo López", "Descripcion");
+		actual = Gestor_Dominio.buscarArtista(expected.getNombre());
+		assertEquals(expected.getNombre(), actual.getNombre());
+		
 	}
 
 	@Test
 	public void testAddArtist_NullNull() {
 		Artista expected;
 		Artista actual;
-		if((expected = Gestor_Dominio.añadirArtista(null,null)) == null){
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		}else{ 
-			actual = Gestor_Dominio.buscarArtista(expected.getNombre());
-			assertEquals(expected.getNombre(), actual.getNombre());
-		}
+		
+		expected = Gestor_Dominio.añadirArtista(null,null);
+		assertNull(expected);
+		actual = Gestor_Dominio.buscarArtista(null);
+		assertNull(actual);
+		
 	}
 	
 	@Test
 	public void testAddAlbumStringIsDoubleStringIsnt() {
 		Album expected;
 		Album actual;
-		if((expected = Gestor_Dominio.añadirAlbum("Hit And Run", 2.0 * 10, "Pablo López")) == null){
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		}else{ 
-			actual = Gestor_Dominio.buscarAlbum(expected.getNombre());
-			assertEquals(expected.getNombre(), actual.getNombre());
-		}
+	
+		expected = Gestor_Dominio.añadirAlbum("Hit And Run", 2.0 * 10, "Pablo López");
+		actual = Gestor_Dominio.buscarAlbum(expected.getNombre());
+		assertEquals(expected.getNombre(), actual.getNombre());
+		
 	}
 		
 	@Test
@@ -364,6 +351,7 @@ public class Gestor_Dominio_Test {
 		assertNull(Gestor_Dominio.buscarArtista(actual.getNombre()));
 	}
 	
+	@Test
 	public void testRemoveArtistNull() {
 		Artista actual = new Artista(null,null);
 		Gestor_Dominio.eliminarArtista(actual);
