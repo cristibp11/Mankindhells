@@ -30,11 +30,8 @@ public class Gestor_Remoto {
 		Agente a = new Agente();
 		Usuario u = null;
 		String[] resUsuariolt = a.leer(user, (short) 4);
-		try {
-			u = new Usuario(user, pass, resUsuariolt[2], resUsuariolt[3], Long.valueOf(resUsuariolt[4]),
-					resUsuariolt[5]);
-		} catch (NullPointerException npe) {
-
+		if(resUsuariolt != null && resUsuariolt[0].equals(pass)){
+			u = new Usuario(user, pass, resUsuariolt[2], resUsuariolt[3], Long.valueOf(resUsuariolt[4]), resUsuariolt[5]);
 		}
 		return u;
 	}
@@ -45,7 +42,7 @@ public class Gestor_Remoto {
 	 */
 	public static void eliminarUsuario(Usuario Usuario) {
 		if (Usuario.getUser() != null && Usuario.getPass() != null && Usuario.getNombre() != null
-				&& Usuario.getApellidos() != null && (Usuario.getnCuenta() - 999999) >= 0) {
+				&& Usuario.getApellidos() != null && Usuario.getnCuenta() >= 0 && Usuario.getnCuenta() < 1000000) {
 			Agente a = new Agente();
 			String[] search = { Usuario.getUser(), Usuario.getPass(), Usuario.getNombre(), Usuario.getApellidos(),
 					String.valueOf(Usuario.getnCuenta()), Usuario.getEmail() };

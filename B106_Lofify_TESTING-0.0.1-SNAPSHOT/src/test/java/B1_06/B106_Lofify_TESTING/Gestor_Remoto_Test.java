@@ -2,10 +2,8 @@ package B1_06.B106_Lofify_TESTING;
 
 import static org.junit.Assert.*;
 
-import java.util.NoSuchElementException;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import B1_06.B106_Lofify_TESTING.Servidor.Dominio.Usuario;
@@ -18,85 +16,61 @@ public class Gestor_Remoto_Test {
 	}
 
 	@Test
-	public void testSigninUserManual_1() {
+	public void testSigninUserManual_IncorrectBankAccount() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("", "",
 				"Cristina", "Bolanos Perez", -300, "");
-		Usuario actual;
-		if (expected == null) {
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		} else {
-			actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+		if (expected != null) {
+			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
 					expected.getPass());
-			assertEquals(expected.getUser(), actual.getUser());
-			assertEquals(expected.getPass(), actual.getPass());
+			assertNotNull(expected);
+			assertNull(actual);
 		}
+		assertNull(expected);
 	}
 
 	@Test
-	public void testSigninUserManual_2() {
+	public void testSigninUserManual_NullAtributtes() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("Erizo12", null,
 				null, null, 1, "CrisDelegada@gmail.com");
-		Usuario actual;
-		if (expected == null) {
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		} else {
-			actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+		if (expected != null) {
+			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
 					expected.getPass());
-			assertEquals(expected.getUser(), actual.getUser());
-			assertEquals(expected.getPass(), actual.getPass());
+			assertNotNull(expected);
+			assertNull(actual);
 		}
+		assertNull(expected);
 	}
 
 	@Test
-	public void testSigninUserManual_3() {
+	public void testSigninUserManual_IncorrectBankAccount2() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("Nuevo usuario",
 				"Contraseña nueva", "Nombre", "Apellidos", (long) 1000000, null);
-		Usuario actual;
-		if (expected == null) {
-			actual = null;
-			assertNull(expected);
-			assertNull(actual);
-		} else {
-			actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
+		if (expected != null) {
+			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
 					expected.getPass());
-			assertEquals(expected.getUser(), actual.getUser());
-			assertEquals(expected.getPass(), actual.getPass());
+			assertNotNull(expected);
+			assertNull(actual);
 		}
+		assertNull(expected);
 	}
 
 	@Test
-	public void loginUser_1() {
+	public void loginUser_WrongLogin() {
 		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario("Erizo12",
 				"New password");
-		if (actual == null) {
-			assertNull(actual);
-		} else {
-			assertNotNull(actual);
-		}
+		assertNull(actual);
 	}
 
 	@Test
-	public void loginUser_2() {
+	public void loginUser_WrongLogin2() {
 		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario("Pepe", "Pess");
-		if (actual == null) {
-			assertNull(actual);
-		} else {
-			assertNotNull(actual);
-		}
+		assertNull(actual);
 	}
 
 	@Test
-	public void loginUser_3() {
+	public void loginUser_NullAtributtes() {
 		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(null, null);
-		if (actual == null) {
-			assertNull(actual);
-		} else {
-			assertNotNull(actual);
-		}
+		assertNull(actual);
 	}
 
 	@Test
@@ -112,8 +86,7 @@ public class Gestor_Remoto_Test {
 
 	@Test
 	public void testRemoveUser_NoExist() {
-		Usuario expected = new Usuario("NoExist", "NoExist", "NoExist", "NoExist", (long) 123456788,
-				"NoExist");
+		Usuario expected = new Usuario("NoExist", "NoExist", "NoExist", "NoExist", (long) 123456788, "NoExist");
 		B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.eliminarUsuario(expected);
 		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
 				expected.getPass());

@@ -6,7 +6,7 @@ public class Gestor_Remoto {
 
 	public static Usuario nuevoUsuarioManual(String user, String pass, String nombre, String apellidos, long cuenta,
 			String email) {
-		if (user != null && pass != null && nombre != null && apellidos != null && (cuenta - 999999) >= 0) {
+		if (user != null && pass != null && nombre != null && apellidos != null && cuenta>=0 && cuenta<1000000) {
 			return B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.creadorUsuarios(user, pass, nombre,
 					apellidos, cuenta, email);
 		} else {
@@ -28,6 +28,7 @@ public class Gestor_Remoto {
 		if (u != null)
 			log = new Usuario_Logueado(u.getUser(), u.getPass(), u.getNombre(), u.getApellidos(), u.getnCuenta(),
 					u.getEmail());
+		
 		return log;
 	}
 
