@@ -41,6 +41,7 @@ public class Gestor_Remoto_Test {
 		Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario("Erizo12",
 				"New password");
 		assertNull(actual);
+
 	}
 
 	@Test

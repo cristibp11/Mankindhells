@@ -2,6 +2,7 @@ PASS/USER/NAME/SURNAME/NCUENTA/EMAIL
 Pess/Erizo12/Sebastian/Gonzalez Romero/123456789/SebasPutoAmo@gmail.amo
 Poss/xX_CrisCarre_Xx/Cristina/Carretero Nose/123456787/CrisDelegada@gmail.com
 Puss/xX_JuliLop_Xx/Julia/Lopez Nose/123456786/JuliaLo_fify_pez@gmail.com
+Erizo12/null/null/null/1/CrisDelegada@gmail.com
 Nuevo usuario/Contraseña nueva/Nombre/Apellidos/1000000/null
 Erizo12/null/null/null/1/CrisDelegada@gmail.com
 //Cristina/Bolanos Perez/-300/
