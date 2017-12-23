@@ -19,12 +19,6 @@ public class Gestor_Remoto_Test {
 	public void testSigninUserManual_IncorrectBankAccount() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("", "",
 				"Cristina", "Bolanos Perez", -300, "");
-		if (expected != null) {
-			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-					expected.getPass());
-			assertNotNull(expected);
-			assertNull(actual);
-		}
 		assertNull(expected);
 	}
 
@@ -32,12 +26,6 @@ public class Gestor_Remoto_Test {
 	public void testSigninUserManual_NullAtributtes() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("Erizo12", null,
 				null, null, 1, "CrisDelegada@gmail.com");
-		if (expected != null) {
-			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-					expected.getPass());
-			assertNotNull(expected);
-			assertNull(actual);
-		}
 		assertNull(expected);
 	}
 
@@ -45,12 +33,6 @@ public class Gestor_Remoto_Test {
 	public void testSigninUserManual_IncorrectBankAccount2() {
 		Usuario expected = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.nuevoUsuarioManual("Nuevo usuario",
 				"Contraseña nueva", "Nombre", "Apellidos", (long) 1000000, null);
-		if (expected != null) {
-			Usuario actual = B1_06.B106_Lofify_TESTING.Cliente.Dominio.Gestor_Remoto.loginUsuario(expected.getUser(),
-					expected.getPass());
-			assertNotNull(expected);
-			assertNull(actual);
-		}
 		assertNull(expected);
 	}
 

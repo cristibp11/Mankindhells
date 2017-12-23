@@ -116,7 +116,8 @@ public class Gestor_Dominio_Test {
 		Cancion actual = (Gestor_Dominio.buscarCancion(expected));
 		assertEquals(expected, actual);
 	}
-
+	
+	@Test
 	public void BuscarAlbumStringIs() {
 		String expected = "Sad Boy";
 		Album actual = (Gestor_Dominio.buscarAlbum(expected));
@@ -254,7 +255,8 @@ public class Gestor_Dominio_Test {
 		Gestor_Dominio.eliminarArtista(actual);
 		assertNull(Gestor_Dominio.buscarArtista(actual.getNombre()));
 	}
-
+	
+	@Test
 	public void testRemoveArtistNull() {
 		Artista actual = new Artista(null, null);
 		Gestor_Dominio.eliminarArtista(actual);
