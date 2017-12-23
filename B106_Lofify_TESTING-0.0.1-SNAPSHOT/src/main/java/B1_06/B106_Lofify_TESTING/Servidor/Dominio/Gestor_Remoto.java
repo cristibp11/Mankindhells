@@ -33,21 +33,6 @@ public class Gestor_Remoto {
 		}
 		return list;
 	}
-
-	/**
-	 * 
-	 * @param u
-	 * @param cantidad
-	 */
-	public Void cobrarPaypal(Usuario u, double cantidad) {
-		// TODO - implement Gestor_Remoto.cobrarPaypal
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param u
-	 */
 	public static void eliminarUsuario(Usuario u) {
 		Agente a = new Agente();
 		String[] search = {u.getUser(), u.getPass(), u.getNombre(), u.getApellidos(), String.valueOf(u.getnCuenta()), u.getEmail()};

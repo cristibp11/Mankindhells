@@ -14,7 +14,7 @@ public class Gestor_Dominio {
 			String nombre_album){
 		Cancion c = null;
 		Artista ar = buscarArtista(nombre_artista);
-		Album al = buscarAlbum(nombre_album).get(0);
+		Album al = buscarAlbum(nombre_album);
 		c = new Cancion(ar, titulo, metadatos, al, precio);
 		Agente a = new Agente();
 		String[] search = {c.getID(),titulo,al.getID(),ar.getID(),String.valueOf(precio),metadatos};
@@ -40,31 +40,31 @@ public class Gestor_Dominio {
 		return ar;
 	}
 
-	public static LinkedList<Cancion> buscarCancion(String titulo){
+	public static Cancion buscarCancion(String titulo){
 		Agente a = new Agente();
-		LinkedList<Cancion> list = new LinkedList<Cancion>();
+		Cancion cancion = null;
 		String[] result = a.leer(titulo, (short) 1);
 		try{
 			Artista ar = buscarArtista(result[2]);
-			Album al = buscarAlbum(result[1]).get(0);
-			list.add(new Cancion(ar, titulo, result[4], al, Double.parseDouble(result[3])));
+			Album al = buscarAlbum(result[1]);
+			cancion = new Cancion(ar, titulo, result[4], al, Double.parseDouble(result[3]));
 		}catch (NullPointerException npe){
 			
 		}
-		return list;
+		return cancion;
 	}
 
-	public static LinkedList<Album> buscarAlbum(String nombre){
+	public static Album buscarAlbum(String nombre){
 		Agente a = new Agente();
-		LinkedList<Album> list = new LinkedList<Album>();
+		Album album = null;
 		String[] result = a.leer(nombre, (short) 2);
 		try{
 			Artista ar = buscarArtista(result[2]);
-			list.add(new Album(ar, nombre, Double.parseDouble(result[3])));
+			album = new Album(ar, nombre, Double.parseDouble(result[3]));
 		}catch (NullPointerException npe){
 			
 		}
-		return list;
+		return album;
 	}
 
 	public static Artista buscarArtista(String nombre){
@@ -103,10 +103,6 @@ public class Gestor_Dominio {
 		a.modificar(search, (short) 3, (short) 0);
 	}
 
-	public Void enviarMensaje(String msj) {
-		// TODO - implement Gestor_Dominio.enviarMensaje
-		throw new UnsupportedOperationException();
-	}
 	
 	public static String getMD5(String input){
 		try{
