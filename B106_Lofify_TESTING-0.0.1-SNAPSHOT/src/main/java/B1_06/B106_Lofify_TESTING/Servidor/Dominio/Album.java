@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Album {
 
-	private LinkedList<Cancion> canciones;
+	private LinkedList<Cancion> canciones = new LinkedList<Cancion>();
 	private Artista autor;
 	private String nombre;
 	private double precio;

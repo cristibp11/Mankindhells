@@ -31,7 +31,7 @@ public class Gestor_Remoto {
 		Usuario u = null;
 		String[] resUsuariolt = a.leer(user, (short) 4);
 		if(resUsuariolt != null && resUsuariolt[0].equals(pass)){
-			u = new Usuario(user, pass, resUsuariolt[2], resUsuariolt[3], Long.valueOf(resUsuariolt[4]), resUsuariolt[5]);
+			u = new Usuario(user, pass, resUsuariolt[2], resUsuariolt[3], Long.parseLong(resUsuariolt[4]), resUsuariolt[5]);
 		}
 		return u;
 	}

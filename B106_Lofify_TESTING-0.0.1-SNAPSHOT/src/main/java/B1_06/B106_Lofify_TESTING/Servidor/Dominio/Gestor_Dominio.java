@@ -1,6 +1,7 @@
 package B1_06.B106_Lofify_TESTING.Servidor.Dominio;
 
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -123,7 +124,7 @@ public class Gestor_Dominio {
 	public static String getMD5(String input) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] messageDigest = md.digest(input.getBytes());
+			byte[] messageDigest = md.digest(input.getBytes(Charset.forName(System.getProperty("file.encoding"))));
 			BigInteger number = new BigInteger(messageDigest);
 			return number.toString(16);
 		} catch (NoSuchAlgorithmException nsae) {
