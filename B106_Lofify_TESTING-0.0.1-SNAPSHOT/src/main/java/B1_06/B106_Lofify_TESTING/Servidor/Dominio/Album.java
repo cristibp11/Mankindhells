@@ -14,7 +14,7 @@ public class Album {
 		this.autor = autor;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.id = Gestor_Dominio.getMD5(autor.getID()+""+nombre);
+		this.id = Gestor_Dominio.getMD5(autor.getID()+" "+nombre);
 	}
 	
 	public Album(String id){
@@ -37,7 +37,7 @@ public class Album {
 		return this.id;
 	}
 	
-	public void addCancion(Cancion c){
+	public void addCancion(Cancion c) {
 		this.canciones.add(c);
 	}
 

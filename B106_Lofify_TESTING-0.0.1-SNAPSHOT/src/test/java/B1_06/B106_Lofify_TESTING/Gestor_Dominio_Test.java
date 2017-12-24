@@ -65,8 +65,7 @@ public class Gestor_Dominio_Test {
 	public void testAddAlbumStringIsntDoubleNull() {
 		Album expected = Gestor_Dominio.añadirAlbum("Prometo", 0.1 * 10, null);
 		Album actual = Gestor_Dominio.buscarAlbum((String) null);
-		assertNull(expected);
-		assertNull(actual);
+		assertEquals(expected,actual);
 	}
 
 	@Test
@@ -116,7 +115,7 @@ public class Gestor_Dominio_Test {
 		Cancion actual = (Gestor_Dominio.buscarCancion(expected));
 		assertEquals(expected, actual);
 	}
-
+	
 	@Test
 	public void BuscarAlbumStringIs() {
 		String expected = "Sad Boy";
@@ -255,7 +254,7 @@ public class Gestor_Dominio_Test {
 		Gestor_Dominio.eliminarArtista(actual);
 		assertNull(Gestor_Dominio.buscarArtista(actual.getNombre()));
 	}
-
+	
 	@Test
 	public void testRemoveArtistNull() {
 		Artista actual = new Artista(null, null);

@@ -54,7 +54,7 @@ public class Agente {
 			sc = new Scanner(archivo, System.getProperty("file.encoding"));
 			sc.nextLine();
 			while (sc.hasNextLine()) {
-				if (((aux = sc.nextLine().split("/"))[1].equals(toSearch))) {
+				if ((aux = sc.nextLine().split("/"))[1].equals(toSearch)) {
 					result = aux;
 					break;
 				}
@@ -105,7 +105,7 @@ public class Agente {
 			lineas = new Vector();
 
 			while ((linea = br.readLine()) != null) {
-				if (!((linea.split("/")[1]).equals(toModify[1]))) {
+				if (!(linea.split("/")[1]).equals(toModify[1])) {
 					lineas.addElement(linea);
 				}
 			}

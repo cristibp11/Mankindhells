@@ -275,11 +275,12 @@ public class IU_Servidor {
 		public void actionPerformed(ActionEvent e) {
 			btnAadir.setEnabled(false);
 			switch(tpnlMOD1.getSelectedIndex()){
-			case 0:
-				pnlForm.add(new Form_Canciones());
-				pnlForm.revalidate();
-				pnlForm.repaint();
-			case 1:
+				case 0:
+					pnlForm.add(new Form_Canciones());
+					pnlForm.revalidate();
+					pnlForm.repaint();
+				default:
+					break;
 				
 			}
 		}

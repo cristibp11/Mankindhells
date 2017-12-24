@@ -4,9 +4,6 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 import B1_06.B106_Lofify_TESTING.Servidor.Persistencia.Agente;
 

@@ -1,6 +1,6 @@
 PASS/USER/NAME/SURNAME/NCUENTA/EMAIL
 Pess/Erizo12/Sebastian/Gonzalez Romero/123456789/SebasPutoAmo@gmail.amo
-Piss/CristiBolsas/Cristina/Bolanos Perez/123456788/Cristibope@gmail.com
 Poss/xX_CrisCarre_Xx/Cristina/Carretero Nose/123456787/CrisDelegada@gmail.com
 Puss/xX_JuliLop_Xx/Julia/Lopez Nose/123456786/JuliaLo_fify_pez@gmail.com
 Usuarioser/Usuarioser/DefaUsuariolt//213655987/Usuarioser@Usuarioser.com
+Contraseña nueva/Nuevo usuario/Nombre/Apellidos/10/nuevo@email.com
