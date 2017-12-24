@@ -5,7 +5,7 @@
 	<groupId>B1-06</groupId>
 	<artifactId>B106_Lofify_TESTING</artifactId>
 	<version>0.0.1</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<name>B106_Lofify_TESTING</name>
 	<url>http://maven.apache.org</url>
@@ -14,17 +14,18 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jacoco.version>0.7.9</jacoco.version>
 	</properties>
-
-	<dependencies>
+<dependencies>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+
 	</dependencies>
 	<build>
-		<finalName>B106_Lofify_TESTING</finalName>
+		<finalName>JunitExample</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.jacoco</groupId>
@@ -79,8 +80,10 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -94,6 +97,7 @@
 					<skipEmptyReport>false</skipEmptyReport>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
