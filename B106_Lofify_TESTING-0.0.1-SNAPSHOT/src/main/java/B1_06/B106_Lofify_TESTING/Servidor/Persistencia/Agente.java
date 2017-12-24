@@ -49,7 +49,7 @@ public class Agente {
 				if(((aux = sc.nextLine().split("/"))[1].equals(toSearch))){
 					result = aux;
 					break;
-				};
+				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Archivo no encontrado");

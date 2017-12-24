@@ -3,5 +3,6 @@ ID/ARTISTA/DESCRIPCION
 -4a406bf71fc046e575d84a4199ccba28/Queen/Mitico primo
 -41269b578a8a4c6c200586ebed69f509/Lil Pump/Gucci gang gucci gang gucci gang gucci gang...
 1b445afe88a6b229e8ea1fec4078b9ee/Pablo Lï¿½pez/Descripcion
--3d51055ef1d39f3d97dd0a57cdd0f947/Kinder Malo/Artista de trap rollo sadboy
 283d5390be1145bab4d4071db564b1eb/Pablo LÃ³pez/Descripcion
+-3d51055ef1d39f3d97dd0a57cdd0f947/Kinder Malo/Artista de trap rollo sadboy
+1b445afe88a6b229e8ea1fec4078b9ee/Pablo López/Descripcion
