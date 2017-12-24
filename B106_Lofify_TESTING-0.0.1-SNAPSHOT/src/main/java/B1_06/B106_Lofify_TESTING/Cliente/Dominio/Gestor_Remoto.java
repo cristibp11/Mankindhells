@@ -14,9 +14,7 @@ public class Gestor_Remoto {
 		}
 	}
 
-	public static Usuario nuevoUsuarioGeneral() {
-		return B1_06.B106_Lofify_TESTING.Servidor.Dominio.Gestor_Remoto.fabricaUsuarios();
-	}
+
 
 	public static Usuario_Logueado loginUsuario(String user, String pass) {
 		

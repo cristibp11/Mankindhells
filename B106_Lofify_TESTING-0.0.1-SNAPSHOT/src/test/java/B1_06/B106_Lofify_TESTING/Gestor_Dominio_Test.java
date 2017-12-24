@@ -65,8 +65,7 @@ public class Gestor_Dominio_Test {
 	public void testAddAlbumStringIsntDoubleNull() {
 		Album expected = Gestor_Dominio.añadirAlbum("Prometo", 0.1 * 10, null);
 		Album actual = Gestor_Dominio.buscarAlbum((String) null);
-		assertNull(expected);
-		assertNull(actual);
+		assertEquals(expected,actual);
 	}
 
 	@Test

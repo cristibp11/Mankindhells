@@ -6,15 +6,7 @@ import B1_06.B106_Lofify_TESTING.Servidor.Persistencia.Agente;
 
 public class Gestor_Remoto {
 
-	public static Usuario fabricaUsuarios() {
-		Usuario Usuario = new Usuario("Usuarioser", "Usuarioser", "DefaUsuariolt", "", (long) 213655987,
-				"Usuarioser@Usuarioser.com");
-		Agente a = new Agente();
-		String[] search = { Usuario.getUser(), Usuario.getPass(), Usuario.getNombre(), Usuario.getApellidos(),
-				String.valueOf(Usuario.getnCuenta()), Usuario.getEmail() };
-		a.modificar(search, (short) 4, (short) 1);
-		return Usuario;
-	}
+
 
 	public static Usuario creadorUsuarios(String Usuarioser, String pass, String nombre, String apellidos,
 			long cUsuarioenta, String email) {
