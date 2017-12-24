@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IU_Servidor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">B106_Lofify_TESTING</a> &gt; <a href="index.source.html" class="el_package">B1_06.B106_Lofify_TESTING.Servidor.Presentacion</a> &gt; <span class="el_source">IU_Servidor.java</span></div><h1>IU_Servidor.java</h1><pre class="source lang-java linenums">package B1_06.B106_Lofify_TESTING.Servidor.Presentacion;
+
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.text.MaskFormatter;
+
+public class IU_Servidor {
+
+	private JFrame frame;
+	private JTabbedPane tpnlMOD1;
+	private JPanel pnlCanciones;
+	private JPanel pnlAlbumes;
+	private JButton btnAadir;
+	private JPanel pnlMOD1;
+	private JPanel pnlBotones;
+	private JPanel pnlForm;
+	private JButton btnCancelar;
+	private JPanel pnlListado;
+	private JPanel pnlForm2;
+	private JPanel pnlListado2;
+
+	public static void main(String[] args) {
+<span class="nc" id="L43">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L46">					IU_Servidor window = new IU_Servidor();</span>
+<span class="nc" id="L47">					window.frame.setVisible(true);</span>
+<span class="nc" id="L48">				} catch (Exception e) {</span>
+<span class="nc" id="L49">					e.printStackTrace();</span>
+<span class="nc" id="L50">				}</span>
+<span class="nc" id="L51">			}</span>
+		});
+<span class="nc" id="L53">	}</span>
+
+<span class="nc" id="L55">	public IU_Servidor() {</span>
+<span class="nc" id="L56">		initialize();</span>
+<span class="nc" id="L57">	}</span>
+
+	private void initialize() {
+<span class="nc" id="L60">		frame = new JFrame();</span>
+<span class="nc" id="L61">		frame.setBounds(100, 100, 709, 674);</span>
+<span class="nc" id="L62">		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L63">		frame.getContentPane().setLayout(new CardLayout(0, 0));</span>
+		
+<span class="nc" id="L65">		pnlMOD1 = new JPanel();</span>
+<span class="nc" id="L66">		frame.getContentPane().add(pnlMOD1, &quot;name_172617068452863&quot;);</span>
+<span class="nc" id="L67">		pnlMOD1.setLayout(new BorderLayout(0, 0));</span>
+		
+<span class="nc" id="L69">		pnlBotones = new JPanel();</span>
+<span class="nc" id="L70">		pnlMOD1.add(pnlBotones, BorderLayout.SOUTH);</span>
+<span class="nc" id="L71">		pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));</span>
+		
+<span class="nc" id="L73">		btnAadir = new JButton(&quot;Añadir&quot;);</span>
+<span class="nc" id="L74">		btnAadir.addActionListener(new BtnAadirActionListener());</span>
+<span class="nc" id="L75">		pnlBotones.add(btnAadir);</span>
+		
+<span class="nc" id="L77">		tpnlMOD1 = new JTabbedPane(JTabbedPane.TOP);</span>
+<span class="nc" id="L78">		pnlMOD1.add(tpnlMOD1, BorderLayout.CENTER);</span>
+		
+<span class="nc" id="L80">		pnlCanciones = new JPanel();</span>
+<span class="nc" id="L81">		tpnlMOD1.addTab(&quot;Canciones&quot;, null, pnlCanciones, null);</span>
+<span class="nc" id="L82">		pnlCanciones.setLayout(new BorderLayout(0, 0));</span>
+		
+<span class="nc" id="L84">		pnlForm = new JPanel();</span>
+<span class="nc" id="L85">		pnlCanciones.add(pnlForm, BorderLayout.SOUTH);</span>
+<span class="nc" id="L86">		pnlForm.setLayout(new GridLayout(1, 1, 0, 0));</span>
+		
+<span class="nc" id="L88">		pnlListado = new JPanel();</span>
+<span class="nc" id="L89">		pnlCanciones.add(pnlListado, BorderLayout.CENTER);</span>
+<span class="nc" id="L90">		pnlListado.setLayout(new FlowLayout(FlowLayout.CENTER, 1, 5));</span>
+		
+<span class="nc" id="L92">		pnlAlbumes = new JPanel();</span>
+<span class="nc" id="L93">		tpnlMOD1.addTab(&quot;Álbumes&quot;, null, pnlAlbumes, null);</span>
+<span class="nc" id="L94">		pnlAlbumes.setLayout(new BorderLayout(0, 0));</span>
+		
+<span class="nc" id="L96">		pnlForm2 = new JPanel();</span>
+<span class="nc" id="L97">		pnlAlbumes.add(pnlForm2, BorderLayout.SOUTH);</span>
+		
+<span class="nc" id="L99">		pnlListado2 = new JPanel();</span>
+<span class="nc" id="L100">		pnlAlbumes.add(pnlListado2, BorderLayout.CENTER);</span>
+<span class="nc" id="L101">	}</span>
+	
+	private class item_Cancion extends JPanel {
+		private static final long serialVersionUID = 1L;
+		private JTextField textField;
+<span class="nc" id="L106">		public item_Cancion(String nombre) {</span>
+<span class="nc" id="L107">			setBorder(new LineBorder(Color.BLUE, 2));</span>
+<span class="nc" id="L108">			setLayout(new GridLayout(1, 1, 0, 0));</span>
+			
+<span class="nc" id="L110">			textField = new JTextField(nombre);</span>
+<span class="nc" id="L111">			add(textField);</span>
+<span class="nc" id="L112">			textField.setColumns(10);</span>
+
+<span class="nc" id="L114">		}</span>
+	}
+	
+	private class Form_Canciones extends JPanel {
+		private static final long serialVersionUID = 1L;
+		private JLabel lblTitulo;
+		private JTextField txtTitulo;
+		private JLabel lblMetadatos;
+		private JTextField txtMetadatos;
+		private JLabel lblPrecio;
+		private JFormattedTextField ftxtPrecio;
+		private JLabel lblAutor;
+		private JTextField txtAutor;
+		private JLabel lbllbum;
+		private JTextField txtAlbum;
+		private JButton btnAceptar;
+
+		/**
+		 * Create the panel.
+		 */
+<span class="nc" id="L134">		public Form_Canciones() {</span>
+<span class="nc" id="L135">			GridBagLayout gridBagLayout = new GridBagLayout();</span>
+<span class="nc" id="L136">			gridBagLayout.columnWidths = new int[]{84, 225, 0, 0};</span>
+<span class="nc" id="L137">			gridBagLayout.rowHeights = new int[] {30, 30, 30, 30, 30, 30, 0};</span>
+<span class="nc" id="L138">			gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};</span>
+<span class="nc" id="L139">			gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};</span>
+<span class="nc" id="L140">			setLayout(gridBagLayout);</span>
+			
+<span class="nc" id="L142">			lblTitulo = new JLabel(&quot;Titulo:&quot;);</span>
+<span class="nc" id="L143">			GridBagConstraints gbc_lblTitulo = new GridBagConstraints();</span>
+<span class="nc" id="L144">			gbc_lblTitulo.anchor = GridBagConstraints.EAST;</span>
+<span class="nc" id="L145">			gbc_lblTitulo.fill = GridBagConstraints.VERTICAL;</span>
+<span class="nc" id="L146">			gbc_lblTitulo.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L147">			gbc_lblTitulo.gridx = 0;</span>
+<span class="nc" id="L148">			gbc_lblTitulo.gridy = 0;</span>
+<span class="nc" id="L149">			add(lblTitulo, gbc_lblTitulo);</span>
+			
+<span class="nc" id="L151">			txtTitulo = new JTextField();</span>
+<span class="nc" id="L152">			GridBagConstraints gbc_txtTitulo = new GridBagConstraints();</span>
+<span class="nc" id="L153">			gbc_txtTitulo.gridwidth = 2;</span>
+<span class="nc" id="L154">			gbc_txtTitulo.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L155">			gbc_txtTitulo.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L156">			gbc_txtTitulo.gridx = 1;</span>
+<span class="nc" id="L157">			gbc_txtTitulo.gridy = 0;</span>
+<span class="nc" id="L158">			add(txtTitulo, gbc_txtTitulo);</span>
+<span class="nc" id="L159">			txtTitulo.setColumns(10);</span>
+			
+<span class="nc" id="L161">			lblMetadatos = new JLabel(&quot;Metadatos:&quot;);</span>
+<span class="nc" id="L162">			GridBagConstraints gbc_lblMetadatos = new GridBagConstraints();</span>
+<span class="nc" id="L163">			gbc_lblMetadatos.anchor = GridBagConstraints.EAST;</span>
+<span class="nc" id="L164">			gbc_lblMetadatos.fill = GridBagConstraints.VERTICAL;</span>
+<span class="nc" id="L165">			gbc_lblMetadatos.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L166">			gbc_lblMetadatos.gridx = 0;</span>
+<span class="nc" id="L167">			gbc_lblMetadatos.gridy = 1;</span>
+<span class="nc" id="L168">			add(lblMetadatos, gbc_lblMetadatos);</span>
+			
+<span class="nc" id="L170">			txtMetadatos = new JTextField();</span>
+<span class="nc" id="L171">			GridBagConstraints gbc_txtMetadatos = new GridBagConstraints();</span>
+<span class="nc" id="L172">			gbc_txtMetadatos.gridwidth = 2;</span>
+<span class="nc" id="L173">			gbc_txtMetadatos.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L174">			gbc_txtMetadatos.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L175">			gbc_txtMetadatos.gridx = 1;</span>
+<span class="nc" id="L176">			gbc_txtMetadatos.gridy = 1;</span>
+<span class="nc" id="L177">			add(txtMetadatos, gbc_txtMetadatos);</span>
+<span class="nc" id="L178">			txtMetadatos.setColumns(10);</span>
+			
+<span class="nc" id="L180">			lblPrecio = new JLabel(&quot;Precio:&quot;);</span>
+<span class="nc" id="L181">			GridBagConstraints gbc_lblPrecio = new GridBagConstraints();</span>
+<span class="nc" id="L182">			gbc_lblPrecio.anchor = GridBagConstraints.EAST;</span>
+<span class="nc" id="L183">			gbc_lblPrecio.fill = GridBagConstraints.VERTICAL;</span>
+<span class="nc" id="L184">			gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L185">			gbc_lblPrecio.gridx = 0;</span>
+<span class="nc" id="L186">			gbc_lblPrecio.gridy = 2;</span>
+<span class="nc" id="L187">			add(lblPrecio, gbc_lblPrecio);</span>
+			
+			try{
+<span class="nc" id="L190">				ftxtPrecio = new JFormattedTextField(new MaskFormatter(&quot;##'.##&quot;));</span>
+<span class="nc" id="L191">			}catch (ParseException e){</span>
+<span class="nc" id="L192">				e.printStackTrace();</span>
+<span class="nc" id="L193">			}</span>
+<span class="nc" id="L194">			GridBagConstraints gbc_ftxtPrecio = new GridBagConstraints();</span>
+<span class="nc" id="L195">			gbc_ftxtPrecio.gridwidth = 2;</span>
+<span class="nc" id="L196">			gbc_ftxtPrecio.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L197">			gbc_ftxtPrecio.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L198">			gbc_ftxtPrecio.gridx = 1;</span>
+<span class="nc" id="L199">			gbc_ftxtPrecio.gridy = 2;</span>
+<span class="nc" id="L200">			add(ftxtPrecio, gbc_ftxtPrecio);</span>
+			
+<span class="nc" id="L202">			lblAutor = new JLabel(&quot;Autor:&quot;);</span>
+<span class="nc" id="L203">			GridBagConstraints gbc_lblAutor = new GridBagConstraints();</span>
+<span class="nc" id="L204">			gbc_lblAutor.anchor = GridBagConstraints.EAST;</span>
+<span class="nc" id="L205">			gbc_lblAutor.fill = GridBagConstraints.VERTICAL;</span>
+<span class="nc" id="L206">			gbc_lblAutor.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L207">			gbc_lblAutor.gridx = 0;</span>
+<span class="nc" id="L208">			gbc_lblAutor.gridy = 3;</span>
+<span class="nc" id="L209">			add(lblAutor, gbc_lblAutor);</span>
+			
+<span class="nc" id="L211">			txtAutor = new JTextField();</span>
+<span class="nc" id="L212">			GridBagConstraints gbc_txtAutor = new GridBagConstraints();</span>
+<span class="nc" id="L213">			gbc_txtAutor.gridwidth = 2;</span>
+<span class="nc" id="L214">			gbc_txtAutor.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L215">			gbc_txtAutor.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L216">			gbc_txtAutor.gridx = 1;</span>
+<span class="nc" id="L217">			gbc_txtAutor.gridy = 3;</span>
+<span class="nc" id="L218">			add(txtAutor, gbc_txtAutor);</span>
+<span class="nc" id="L219">			txtAutor.setColumns(10);</span>
+			
+<span class="nc" id="L221">			lbllbum = new JLabel(&quot;Álbum:&quot;);</span>
+<span class="nc" id="L222">			GridBagConstraints gbc_lbllbum = new GridBagConstraints();</span>
+<span class="nc" id="L223">			gbc_lbllbum.anchor = GridBagConstraints.EAST;</span>
+<span class="nc" id="L224">			gbc_lbllbum.fill = GridBagConstraints.VERTICAL;</span>
+<span class="nc" id="L225">			gbc_lbllbum.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L226">			gbc_lbllbum.gridx = 0;</span>
+<span class="nc" id="L227">			gbc_lbllbum.gridy = 4;</span>
+<span class="nc" id="L228">			add(lbllbum, gbc_lbllbum);</span>
+			
+<span class="nc" id="L230">			txtAlbum = new JTextField();</span>
+<span class="nc" id="L231">			GridBagConstraints gbc_txtAlbum = new GridBagConstraints();</span>
+<span class="nc" id="L232">			gbc_txtAlbum.gridwidth = 2;</span>
+<span class="nc" id="L233">			gbc_txtAlbum.insets = new Insets(0, 0, 5, 5);</span>
+<span class="nc" id="L234">			gbc_txtAlbum.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L235">			gbc_txtAlbum.gridx = 1;</span>
+<span class="nc" id="L236">			gbc_txtAlbum.gridy = 4;</span>
+<span class="nc" id="L237">			add(txtAlbum, gbc_txtAlbum);</span>
+<span class="nc" id="L238">			txtAlbum.setColumns(10);</span>
+			
+<span class="nc" id="L240">			btnAceptar = new JButton(&quot;Aceptar&quot;);</span>
+<span class="nc" id="L241">			btnAceptar.addActionListener(new BtnFormActionListener());</span>
+<span class="nc" id="L242">			GridBagConstraints gbc_btnAceptar = new GridBagConstraints();</span>
+<span class="nc" id="L243">			gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);</span>
+<span class="nc" id="L244">			gbc_btnAceptar.anchor = GridBagConstraints.EAST;</span>
+<span class="nc" id="L245">			gbc_btnAceptar.gridx = 1;</span>
+<span class="nc" id="L246">			gbc_btnAceptar.gridy = 5;</span>
+<span class="nc" id="L247">			add(btnAceptar, gbc_btnAceptar);</span>
+			
+<span class="nc" id="L249">			btnCancelar = new JButton(&quot;Cancelar&quot;);</span>
+<span class="nc" id="L250">			btnCancelar.addActionListener(new BtnFormActionListener());</span>
+<span class="nc" id="L251">			GridBagConstraints gbc_btnCancelar = new GridBagConstraints();</span>
+<span class="nc" id="L252">			gbc_btnCancelar.gridx = 2;</span>
+<span class="nc" id="L253">			gbc_btnCancelar.gridy = 5;</span>
+<span class="nc" id="L254">			add(btnCancelar, gbc_btnCancelar);</span>
+
+<span class="nc" id="L256">		}</span>
+		
+<span class="nc" id="L258">		private class BtnFormActionListener implements ActionListener {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc bnc" id="L260" title="All 2 branches missed.">				if(arg0.getActionCommand().equals(&quot;Aceptar&quot;)){</span>
+<span class="nc" id="L261">					pnlListado.add(new item_Cancion(txtTitulo.getText()));</span>
+<span class="nc" id="L262">					pnlListado.revalidate();</span>
+<span class="nc" id="L263">					pnlListado.repaint();</span>
+				}
+<span class="nc" id="L265">				pnlForm.remove(pnlForm.getComponent(0));</span>
+<span class="nc" id="L266">				pnlForm.revalidate();</span>
+<span class="nc" id="L267">				pnlForm.repaint();</span>
+<span class="nc" id="L268">				btnAadir.setEnabled(true);</span>
+<span class="nc" id="L269">			}</span>
+		}
+
+	}
+	
+<span class="nc" id="L274">	private class BtnAadirActionListener implements ActionListener {</span>
+		public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L276">			btnAadir.setEnabled(false);</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">			switch(tpnlMOD1.getSelectedIndex()){</span>
+			case 0:
+<span class="nc" id="L279">				pnlForm.add(new Form_Canciones());</span>
+<span class="nc" id="L280">				pnlForm.revalidate();</span>
+<span class="nc" id="L281">				pnlForm.repaint();</span>
+			case 1:
+				
+			}
+<span class="nc" id="L285">		}</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
